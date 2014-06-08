@@ -199,6 +199,9 @@
     <EmbeddedResource Include="Form\FormOption.resx">
       <DependentUpon>FormOption.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormTableOption.resx">
+      <DependentUpon>FormTableOption.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
