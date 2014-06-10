@@ -66,8 +66,8 @@ namespace ExcelAddInDataOutput
         public void btnTableConfigure_Click(Microsoft.Office.Core.IRibbonControl control)
         {
 
-            FormOption formOption = new FormOption();
-            formOption.ShowDialog();
+            FormTableOption formTableOption = new FormTableOption();
+            formTableOption.ShowDialog();
         }
 
         

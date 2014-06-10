@@ -46,4 +46,4 @@ using Microsoft.Office.Tools.Excel;
 // Version 2003 の動作と一致します。これにより、数式名および日付形式などの 
 // ロケール情報に、予期しない結果が生じる可能性があります。
 // 
-[assembly: ExcelLocale1033(false)]
+//[assembly: ExcelLocale1033(false)]

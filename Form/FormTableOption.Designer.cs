@@ -40,13 +40,18 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.lslFileList = new System.Windows.Forms.ListBox();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTableId
             // 
             this.lblTableId.AutoSize = true;
-            this.lblTableId.Location = new System.Drawing.Point(30, 15);
+            this.lblTableId.Location = new System.Drawing.Point(306, 16);
             this.lblTableId.Name = "lblTableId";
             this.lblTableId.Size = new System.Drawing.Size(65, 12);
             this.lblTableId.TabIndex = 0;
@@ -55,7 +60,7 @@
             // lblWhere
             // 
             this.lblWhere.AutoSize = true;
-            this.lblWhere.Location = new System.Drawing.Point(30, 60);
+            this.lblWhere.Location = new System.Drawing.Point(306, 61);
             this.lblWhere.Name = "lblWhere";
             this.lblWhere.Size = new System.Drawing.Size(35, 12);
             this.lblWhere.TabIndex = 0;
@@ -64,7 +69,7 @@
             // lblSQL
             // 
             this.lblSQL.AutoSize = true;
-            this.lblSQL.Location = new System.Drawing.Point(30, 98);
+            this.lblSQL.Location = new System.Drawing.Point(306, 98);
             this.lblSQL.Name = "lblSQL";
             this.lblSQL.Size = new System.Drawing.Size(35, 12);
             this.lblSQL.TabIndex = 0;
@@ -72,24 +77,24 @@
             // 
             // txtTableId
             // 
-            this.txtTableId.Location = new System.Drawing.Point(152, 15);
+            this.txtTableId.Location = new System.Drawing.Point(392, 13);
             this.txtTableId.Name = "txtTableId";
             this.txtTableId.Size = new System.Drawing.Size(100, 21);
             this.txtTableId.TabIndex = 1;
             // 
             // txtWhere
             // 
-            this.txtWhere.Location = new System.Drawing.Point(152, 53);
+            this.txtWhere.Location = new System.Drawing.Point(392, 58);
             this.txtWhere.Name = "txtWhere";
             this.txtWhere.Size = new System.Drawing.Size(100, 21);
             this.txtWhere.TabIndex = 1;
             // 
             // txtSQL
             // 
-            this.txtSQL.Location = new System.Drawing.Point(152, 95);
+            this.txtSQL.Location = new System.Drawing.Point(392, 98);
             this.txtSQL.Multiline = true;
             this.txtSQL.Name = "txtSQL";
-            this.txtSQL.Size = new System.Drawing.Size(464, 86);
+            this.txtSQL.Size = new System.Drawing.Size(282, 86);
             this.txtSQL.TabIndex = 1;
             // 
             // dataGridView
@@ -138,18 +143,70 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(523, 15);
+            this.btnAdd.Location = new System.Drawing.Point(603, 12);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(93, 32);
+            this.btnAdd.Size = new System.Drawing.Size(71, 21);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "追加";
             this.btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(603, 39);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(71, 21);
+            this.btnUpdate.TabIndex = 3;
+            this.btnUpdate.Text = "更新";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(603, 68);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(71, 21);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "削除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lslFileList
+            // 
+            this.lslFileList.FormattingEnabled = true;
+            this.lslFileList.ItemHeight = 12;
+            this.lslFileList.Location = new System.Drawing.Point(114, 16);
+            this.lslFileList.Name = "lslFileList";
+            this.lslFileList.Size = new System.Drawing.Size(176, 172);
+            this.lslFileList.TabIndex = 4;
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(11, 16);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(87, 21);
+            this.btnImport.TabIndex = 3;
+            this.btnImport.Text = "インポート";
+            this.btnImport.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(12, 52);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(86, 21);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // FormTableOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 403);
+            this.ClientSize = new System.Drawing.Size(698, 395);
+            this.Controls.Add(this.lslFileList);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.txtSQL);
@@ -179,5 +236,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ListBox lslFileList;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnSave;
     }
 }
