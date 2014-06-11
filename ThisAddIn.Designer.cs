@@ -19,7 +19,7 @@ namespace ExcelAddInDataOutput {
         
         internal Microsoft.Office.Tools.CustomTaskPaneCollection CustomTaskPanes;
         
-        internal Microsoft.Office.Tools.SmartTagCollection VstoSmartTags;
+        //internal Microsoft.Office.Tools.SmartTagCollection VstoSmartTags;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "10.0.0.0")]
         private global::System.Object missing = global::System.Type.Missing;
@@ -126,7 +126,7 @@ namespace ExcelAddInDataOutput {
         private void BeginInitialization() {
             this.BeginInit();
             this.CustomTaskPanes.BeginInit();
-            this.VstoSmartTags.BeginInit();
+            //this.VstoSmartTags.BeginInit();
         }
         
         /// 
@@ -134,7 +134,7 @@ namespace ExcelAddInDataOutput {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "10.0.0.0")]
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         private void EndInitialization() {
-            this.VstoSmartTags.EndInit();
+            //this.VstoSmartTags.EndInit();
             this.CustomTaskPanes.EndInit();
             this.EndInit();
         }
@@ -145,7 +145,7 @@ namespace ExcelAddInDataOutput {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         private void InitializeControls() {
             this.CustomTaskPanes = new Microsoft.Office.Tools.CustomTaskPaneCollection(this.ItemProvider, this.HostContext, "CustomTaskPanes", this, "CustomTaskPanes");
-            this.VstoSmartTags = new Microsoft.Office.Tools.SmartTagCollection(this.ItemProvider, this.HostContext, "VstoSmartTags", this, "VstoSmartTags");
+            //this.VstoSmartTags = new Microsoft.Office.Tools.SmartTagCollection(this.ItemProvider, this.HostContext, "VstoSmartTags", this, "VstoSmartTags");
         }
         
         /// 
@@ -168,7 +168,7 @@ namespace ExcelAddInDataOutput {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "10.0.0.0")]
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         protected override void OnShutdown() {
-            this.VstoSmartTags.Dispose();
+            //this.VstoSmartTags.Dispose();
             this.CustomTaskPanes.Dispose();
             base.OnShutdown();
         }

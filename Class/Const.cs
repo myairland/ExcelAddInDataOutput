@@ -14,5 +14,7 @@ namespace ExcelAddInDataOutput
         public const String SETTING_XML = "setting.xml";
 
         public const String PROJECT_NAME = "ExcelAddInDataOutput";
+
+        public const char SPLITOR = (char)0x2;
     }
 }
