@@ -192,21 +192,23 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Class\BaseDataBase.cs" />
-    <Compile Include="Class\Common.cs" />
-    <Compile Include="Class\Const.cs" />
-    <Compile Include="Class\DataOutput.cs" />
-    <Compile Include="Class\FieldInfo.cs" />
-    <Compile Include="Class\ITableInfo.cs" />
-    <Compile Include="Class\SQLServer.cs" />
-    <Compile Include="Class\TableInfo.cs" />
+    <Compile Include="DataBase\BaseDataBase.cs" />
+    <Compile Include="Utility\Common.cs" />
+    <Compile Include="Utility\Const.cs" />
+    <Compile Include="Utility\DataOutput.cs" />
+    <Compile Include="DataBase\DbFactory.cs" />
+    <Compile Include="Model\FieldInfo.cs" />
+    <Compile Include="Model\ITableInfo.cs" />
+    <Compile Include="DataBase\MySQL.cs" />
+    <Compile Include="DataBase\SQLServer.cs" />
+    <Compile Include="Model\TableInfo.cs" />
     <Compile Include="Form\FormOption.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\FormOption.Designer.cs">
       <DependentUpon>FormOption.cs</DependentUpon>
     </Compile>
-    <Compile Include="Class\FormSerialisor.cs" />
+    <Compile Include="Utility\FormSerialisor.cs" />
     <Compile Include="Form\FormSave.cs">
       <SubType>Form</SubType>
     </Compile>

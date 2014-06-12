@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.DataBase
 {
     public class SQLServer :BaseDataBase
     {
@@ -16,13 +16,6 @@ namespace ExcelAddInDataOutput
             this.database = database;
             
         
-        }
-        public SQLServer(string userId, string password, string server)
-        {
-            this.userId = userId;
-            this.password = password;
-            this.server = server;
-
         }
 
         public override bool open()
@@ -68,7 +61,10 @@ namespace ExcelAddInDataOutput
         }
 
 
-
+        public override void getDbSchema()
+        {
+            throw new NotImplementedException();
+        }
 
 
     }

@@ -5,7 +5,8 @@ using System.Reflection;
 using System.Xml;
 using System.Diagnostics;
 
-namespace ExcelAddInDataOutput{
+namespace ExcelAddInDataOutput.Utility
+{
   public static class FormSerialisor {
     /*
      * Drop this class into your project, and add the following line at the top of any class/form that wishes to use it...

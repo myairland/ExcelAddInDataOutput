@@ -36,8 +36,10 @@
             this.tab1 = new Microsoft.Office.Tools.Ribbon.RibbonTab();
             this.groupData = new Microsoft.Office.Tools.Ribbon.RibbonGroup();
             this.btnConfigure = new Microsoft.Office.Tools.Ribbon.RibbonButton();
-            this.btnPopupData = new Microsoft.Office.Tools.Ribbon.RibbonButton();
             this.btnTableConfigure = new Microsoft.Office.Tools.Ribbon.RibbonButton();
+            this.btnPopupData = new Microsoft.Office.Tools.Ribbon.RibbonButton();
+            this.separator1 = new Microsoft.Office.Tools.Ribbon.RibbonSeparator();
+            this.button1 = new Microsoft.Office.Tools.Ribbon.RibbonButton();
             this.tab1.SuspendLayout();
             this.groupData.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +56,8 @@
             this.groupData.Items.Add(this.btnConfigure);
             this.groupData.Items.Add(this.btnTableConfigure);
             this.groupData.Items.Add(this.btnPopupData);
+            this.groupData.Items.Add(this.separator1);
+            this.groupData.Items.Add(this.button1);
             this.groupData.Label = "データ抽出";
             this.groupData.Name = "groupData";
             // 
@@ -62,15 +66,25 @@
             this.btnConfigure.Label = "データベース設定";
             this.btnConfigure.Name = "btnConfigure";
             // 
+            // btnTableConfigure
+            // 
+            this.btnTableConfigure.Label = "抽出テーブル設定";
+            this.btnTableConfigure.Name = "btnTableConfigure";
+            // 
             // btnPopupData
             // 
             this.btnPopupData.Label = "抽出";
             this.btnPopupData.Name = "btnPopupData";
             // 
-            // btnTableConfigure
+            // separator1
             // 
-            this.btnTableConfigure.Label = "抽出テーブル設定";
-            this.btnTableConfigure.Name = "btnTableConfigure";
+            this.separator1.Name = "separator1";
+            // 
+            // button1
+            // 
+            this.button1.Label = "button1";
+            this.button1.Name = "button1";
+            this.button1.Click += new System.EventHandler<Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs>(this.button1_Click);
             // 
             // RibbonPopData
             // 
@@ -92,6 +106,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnConfigure;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnPopupData;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnTableConfigure;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
     }
 
     partial class ThisRibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonReadOnlyCollection

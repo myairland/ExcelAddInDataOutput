@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using Office = Microsoft.Office.Core;
+using ExcelAddInDataOutput.Utility;
 
 // TODO:  リボン (XML) アイテムを有効にするには、次の手順に従います。
 

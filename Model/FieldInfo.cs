@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.Model
 {
     public class FieldInfo
     {

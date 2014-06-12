@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Microsoft.Office.Interop.Excel;
 using System.Data;
 using System.Data.SqlClient;
+using ExcelAddInDataOutput.DataBase;
+using ExcelAddInDataOutput.Model;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.Utility
 {
     class DataOutput
     {
@@ -81,7 +83,7 @@ namespace ExcelAddInDataOutput
 
             try
             {
-            BaseDataBase connnection = Common.GetConnection(Const.DB_TYPE_SQLSERVER, server, user, password, database);
+            BaseDataBase connnection = DbFactory.CreateDbInstance(Const.DB_TYPE_SQLSERVER, server, user, password, database);
 
             connnection.open();
 

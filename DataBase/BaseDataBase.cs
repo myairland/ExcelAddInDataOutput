@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.DataBase
 {
     public abstract class BaseDataBase
     {
@@ -21,6 +21,8 @@ namespace ExcelAddInDataOutput
         public abstract bool open();
 
         public abstract void close();
+
+        public abstract void getDbSchema();
 
     }
 }

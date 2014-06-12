@@ -7,31 +7,10 @@ using System.Data.OracleClient;
 using System.Data.SqlClient;
 using System.Xml;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.Utility
 {
     class Common
     {
-
-
-
-        public static BaseDataBase GetConnection(string DbType, string server, string userName, string password, string database)
-        {
-            string ConectionString = string.Empty;
-
-            BaseDataBase con = null;
-
-            if (DbType == Const.DB_TYPE_ORACLE)
-            {
-               
-            }
-            else if (DbType == Const.DB_TYPE_SQLSERVER)
-            {
-                con = new SQLServer(userName, password, server,database);
-            }
-
-            return con;
-
-        }
 
         public static string pathEdit(string path)
         {
