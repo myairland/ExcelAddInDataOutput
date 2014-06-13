@@ -22,7 +22,7 @@ namespace ExcelAddInDataOutput.DataBase
 
         public abstract void close();
 
-        public abstract void getDbSchema();
+        public abstract DataTable getTableSchema(string tableId);
 
     }
 }

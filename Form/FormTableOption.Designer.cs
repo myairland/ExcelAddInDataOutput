@@ -1,4 +1,4 @@
-﻿namespace ExcelAddInDataOutput
+﻿namespace ExcelAddInDataOutput.Form
 {
     partial class FormTableOption
     {
@@ -46,6 +46,8 @@
             this.btnImport = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelFile = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             this.lblTableId.AutoSize = true;
             this.lblTableId.Location = new System.Drawing.Point(321, 16);
             this.lblTableId.Name = "lblTableId";
-            this.lblTableId.Size = new System.Drawing.Size(65, 12);
+            this.lblTableId.Size = new System.Drawing.Size(54, 12);
             this.lblTableId.TabIndex = 0;
             this.lblTableId.Text = "テーブルID";
             // 
@@ -63,7 +65,7 @@
             this.lblWhere.AutoSize = true;
             this.lblWhere.Location = new System.Drawing.Point(351, 61);
             this.lblWhere.Name = "lblWhere";
-            this.lblWhere.Size = new System.Drawing.Size(35, 12);
+            this.lblWhere.Size = new System.Drawing.Size(36, 12);
             this.lblWhere.TabIndex = 0;
             this.lblWhere.Text = "Where";
             // 
@@ -72,7 +74,7 @@
             this.lblSQL.AutoSize = true;
             this.lblSQL.Location = new System.Drawing.Point(351, 101);
             this.lblSQL.Name = "lblSQL";
-            this.lblSQL.Size = new System.Drawing.Size(35, 12);
+            this.lblSQL.Size = new System.Drawing.Size(38, 12);
             this.lblSQL.TabIndex = 0;
             this.lblSQL.Text = "SQL文";
             // 
@@ -80,14 +82,14 @@
             // 
             this.txtTableId.Location = new System.Drawing.Point(392, 13);
             this.txtTableId.Name = "txtTableId";
-            this.txtTableId.Size = new System.Drawing.Size(100, 21);
+            this.txtTableId.Size = new System.Drawing.Size(100, 19);
             this.txtTableId.TabIndex = 5;
             // 
             // txtWhere
             // 
             this.txtWhere.Location = new System.Drawing.Point(392, 58);
             this.txtWhere.Name = "txtWhere";
-            this.txtWhere.Size = new System.Drawing.Size(100, 21);
+            this.txtWhere.Size = new System.Drawing.Size(100, 19);
             this.txtWhere.TabIndex = 6;
             // 
             // txtSQL
@@ -216,11 +218,32 @@
             this.btnDelFile.UseVisualStyleBackColor = true;
             this.btnDelFile.Click += new System.EventHandler(this.btnDelFile_Click);
             // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(575, 387);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(98, 30);
+            this.btnExit.TabIndex = 12;
+            this.btnExit.Text = "戻る";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(390, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 12);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "ex:FIELD =\"AA\"";
+            // 
             // FormTableOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 395);
+            this.ClientSize = new System.Drawing.Size(698, 425);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lslFileList);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
@@ -266,5 +289,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn WHERE;
         private System.Windows.Forms.DataGridViewTextBoxColumn SQL;
         private System.Windows.Forms.Button btnDelFile;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label label1;
     }
 }

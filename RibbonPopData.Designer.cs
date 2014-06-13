@@ -33,13 +33,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItem1 = new Microsoft.Office.Tools.Ribbon.RibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItem2 = new Microsoft.Office.Tools.Ribbon.RibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItem3 = new Microsoft.Office.Tools.Ribbon.RibbonDropDownItem();
             this.tab1 = new Microsoft.Office.Tools.Ribbon.RibbonTab();
             this.groupData = new Microsoft.Office.Tools.Ribbon.RibbonGroup();
             this.btnConfigure = new Microsoft.Office.Tools.Ribbon.RibbonButton();
             this.btnTableConfigure = new Microsoft.Office.Tools.Ribbon.RibbonButton();
-            this.btnPopupData = new Microsoft.Office.Tools.Ribbon.RibbonButton();
-            this.separator1 = new Microsoft.Office.Tools.Ribbon.RibbonSeparator();
-            this.button1 = new Microsoft.Office.Tools.Ribbon.RibbonButton();
+            this.galleryData = new Microsoft.Office.Tools.Ribbon.RibbonGallery();
             this.tab1.SuspendLayout();
             this.groupData.SuspendLayout();
             this.SuspendLayout();
@@ -55,9 +56,7 @@
             // 
             this.groupData.Items.Add(this.btnConfigure);
             this.groupData.Items.Add(this.btnTableConfigure);
-            this.groupData.Items.Add(this.btnPopupData);
-            this.groupData.Items.Add(this.separator1);
-            this.groupData.Items.Add(this.button1);
+            this.groupData.Items.Add(this.galleryData);
             this.groupData.Label = "データ抽出";
             this.groupData.Name = "groupData";
             // 
@@ -71,20 +70,16 @@
             this.btnTableConfigure.Label = "抽出テーブル設定";
             this.btnTableConfigure.Name = "btnTableConfigure";
             // 
-            // btnPopupData
+            // galleryData
             // 
-            this.btnPopupData.Label = "抽出";
-            this.btnPopupData.Name = "btnPopupData";
-            // 
-            // separator1
-            // 
-            this.separator1.Name = "separator1";
-            // 
-            // button1
-            // 
-            this.button1.Label = "button1";
-            this.button1.Name = "button1";
-            this.button1.Click += new System.EventHandler<Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs>(this.button1_Click);
+            ribbonDropDownItem1.Label = "Item0";
+            ribbonDropDownItem2.Label = "Item1";
+            ribbonDropDownItem3.Label = "Item2";
+            this.galleryData.Items.Add(ribbonDropDownItem1);
+            this.galleryData.Items.Add(ribbonDropDownItem2);
+            this.galleryData.Items.Add(ribbonDropDownItem3);
+            this.galleryData.Label = "未セット";
+            this.galleryData.Name = "galleryData";
             // 
             // RibbonPopData
             // 
@@ -104,10 +99,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupData;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnConfigure;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnPopupData;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnTableConfigure;
-        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGallery galleryData;
     }
 
     partial class ThisRibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonReadOnlyCollection

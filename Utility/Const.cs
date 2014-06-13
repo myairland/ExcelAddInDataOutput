@@ -17,6 +17,17 @@ namespace ExcelAddInDataOutput.Utility
 
         public const String PROJECT_NAME = "ExcelAddInDataOutput";
 
+        public const String XML_USER_ID_KEY = "txtUserId";
+
+        public const String XML_USER_PASSWORD_KEY = "txtPassword";
+
+        public const String XML_USER_SERVER_KEY = "txtServer";
+
+        public const String XML_USER_DATABASE_KEY = "txtDatabase";
+
+        public const String XML_DB_TYPE_KEY = "cbDbType";
+
+
         public const char SPLITOR = (char)0x2;
     }
 }

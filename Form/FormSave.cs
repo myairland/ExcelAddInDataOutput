@@ -10,7 +10,7 @@ using System.IO;
 using System.Collections;
 using ExcelAddInDataOutput.Utility;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.Form
 {
     public partial class FormSave :  System.Windows.Forms.Form
     {

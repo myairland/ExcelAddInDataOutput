@@ -26,5 +26,17 @@ namespace ExcelAddInDataOutput.DataBase
 
             return db;
         }
+
+        public static BaseDataBase CreateDbInstanceFromXML()
+        {
+            String dbType = Common.GetPropertiesFromXmlByName(Const.XML_DB_TYPE_KEY).Substring(0,1);
+            string server = Common.GetPropertiesFromXmlByName(Const.XML_USER_SERVER_KEY);
+            string database = Common.GetPropertiesFromXmlByName(Const.XML_USER_DATABASE_KEY);
+            string user = Common.GetPropertiesFromXmlByName(Const.XML_USER_ID_KEY);
+            string password = Common.GetPropertiesFromXmlByName(Const.XML_USER_PASSWORD_KEY);
+
+            return CreateDbInstance(dbType, user, password, server, database);
+
+        }
     }
 }

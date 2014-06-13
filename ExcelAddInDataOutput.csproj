@@ -198,7 +198,6 @@
     <Compile Include="Utility\DataOutput.cs" />
     <Compile Include="DataBase\DbFactory.cs" />
     <Compile Include="Model\FieldInfo.cs" />
-    <Compile Include="Model\ITableInfo.cs" />
     <Compile Include="DataBase\MySQL.cs" />
     <Compile Include="DataBase\SQLServer.cs" />
     <Compile Include="Model\TableInfo.cs" />

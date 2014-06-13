@@ -1,4 +1,4 @@
-﻿namespace ExcelAddInDataOutput
+﻿namespace ExcelAddInDataOutput.Form
 {
     partial class FormOption
     {
@@ -35,7 +35,7 @@
             this.txtDatabase = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtServer = new System.Windows.Forms.TextBox();
-            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.txtUserId = new System.Windows.Forms.TextBox();
             this.lblDataBase = new System.Windows.Forms.Label();
             this.lblPwd = new System.Windows.Forms.Label();
             this.lblServer = new System.Windows.Forms.Label();
@@ -60,7 +60,7 @@
             this.lblDbType.AutoSize = true;
             this.lblDbType.Location = new System.Drawing.Point(20, 102);
             this.lblDbType.Name = "lblDbType";
-            this.lblDbType.Size = new System.Drawing.Size(41, 12);
+            this.lblDbType.Size = new System.Drawing.Size(31, 12);
             this.lblDbType.TabIndex = 1;
             this.lblDbType.Text = "タイプ";
             // 
@@ -82,7 +82,7 @@
             this.gbDatabase.Controls.Add(this.txtDatabase);
             this.gbDatabase.Controls.Add(this.txtPassword);
             this.gbDatabase.Controls.Add(this.txtServer);
-            this.gbDatabase.Controls.Add(this.txtUserName);
+            this.gbDatabase.Controls.Add(this.txtUserId);
             this.gbDatabase.Controls.Add(this.cbDbType);
             this.gbDatabase.Controls.Add(this.lblDataBase);
             this.gbDatabase.Controls.Add(this.lblPwd);
@@ -100,36 +100,36 @@
             // 
             this.txtDatabase.Location = new System.Drawing.Point(292, 59);
             this.txtDatabase.Name = "txtDatabase";
-            this.txtDatabase.Size = new System.Drawing.Size(97, 21);
+            this.txtDatabase.Size = new System.Drawing.Size(97, 19);
             this.txtDatabase.TabIndex = 4;
             // 
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(292, 18);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(97, 21);
+            this.txtPassword.Size = new System.Drawing.Size(97, 19);
             this.txtPassword.TabIndex = 2;
             // 
             // txtServer
             // 
             this.txtServer.Location = new System.Drawing.Point(85, 59);
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(117, 21);
+            this.txtServer.Size = new System.Drawing.Size(117, 19);
             this.txtServer.TabIndex = 3;
             // 
-            // txtUserName
+            // txtUserId
             // 
-            this.txtUserName.Location = new System.Drawing.Point(85, 18);
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(117, 21);
-            this.txtUserName.TabIndex = 1;
+            this.txtUserId.Location = new System.Drawing.Point(85, 18);
+            this.txtUserId.Name = "txtUserId";
+            this.txtUserId.Size = new System.Drawing.Size(117, 19);
+            this.txtUserId.TabIndex = 1;
             // 
             // lblDataBase
             // 
             this.lblDataBase.AutoSize = true;
             this.lblDataBase.Location = new System.Drawing.Point(223, 62);
             this.lblDataBase.Name = "lblDataBase";
-            this.lblDataBase.Size = new System.Drawing.Size(77, 12);
+            this.lblDataBase.Size = new System.Drawing.Size(62, 12);
             this.lblDataBase.TabIndex = 1;
             this.lblDataBase.Text = "データベース";
             // 
@@ -138,7 +138,7 @@
             this.lblPwd.AutoSize = true;
             this.lblPwd.Location = new System.Drawing.Point(223, 21);
             this.lblPwd.Name = "lblPwd";
-            this.lblPwd.Size = new System.Drawing.Size(65, 12);
+            this.lblPwd.Size = new System.Drawing.Size(52, 12);
             this.lblPwd.TabIndex = 1;
             this.lblPwd.Text = "パスワード";
             // 
@@ -147,7 +147,7 @@
             this.lblServer.AutoSize = true;
             this.lblServer.Location = new System.Drawing.Point(20, 59);
             this.lblServer.Name = "lblServer";
-            this.lblServer.Size = new System.Drawing.Size(53, 12);
+            this.lblServer.Size = new System.Drawing.Size(45, 12);
             this.lblServer.TabIndex = 1;
             this.lblServer.Text = "サーバー";
             // 
@@ -156,7 +156,7 @@
             this.lblUser.AutoSize = true;
             this.lblUser.Location = new System.Drawing.Point(20, 25);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(53, 12);
+            this.lblUser.Size = new System.Drawing.Size(45, 12);
             this.lblUser.TabIndex = 1;
             this.lblUser.Text = "ユーザー";
             // 
@@ -209,7 +209,7 @@
         private System.Windows.Forms.TextBox txtDatabase;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtServer;
-        private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TextBox txtUserId;
         private System.Windows.Forms.Label lblDataBase;
         private System.Windows.Forms.Label lblPwd;
         private System.Windows.Forms.Label lblServer;

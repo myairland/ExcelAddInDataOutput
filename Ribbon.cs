@@ -7,24 +7,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Office = Microsoft.Office.Core;
 using ExcelAddInDataOutput.Utility;
-
-// TODO:  リボン (XML) アイテムを有効にするには、次の手順に従います。
-
-// 1: 次のコード ブロックを ThisAddin、ThisWorkbook、ThisDocument のいずれかのクラスにコピーします。
-
-//  protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
-//  {
-//      return new Ribbon();
-//  }
-
-// 2. ボタンのクリックなど、ユーザーの操作を処理するためのコールバック メソッドを、このクラスの
-//    "リボンのコールバック" 領域に作成します。メモ: このリボンがリボン デザイナーからエクスポートされたものである場合は、
-//    イベント ハンドラー内のコードをコールバック メソッドに移動し、リボン拡張機能 (RibbonX) のプログラミング モデルで
-//    動作するように、コードを変更します。
-
-// 3. リボン XML ファイルのコントロール タグに、コードで適切なコールバック メソッドを識別するための属性を割り当てます。
-
-// 詳細については、Visual Studio Tools for Office ヘルプにあるリボン XML のドキュメントを参照してください。
+using ExcelAddInDataOutput.Form;
+using ExcelAddInDataOutput.DataBase;
+using Microsoft.Office.Core;
 
 
 namespace ExcelAddInDataOutput
@@ -34,8 +19,12 @@ namespace ExcelAddInDataOutput
     {
         private Office.IRibbonUI ribbon;
 
+        private string ApplicationDataPath;
+
         public Ribbon()
         {
+            ApplicationDataPath = Common.pathEdit(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+                      + Const.PROJECT_NAME;
         }
 
         #region IRibbonExtensibility のメンバー
@@ -53,25 +42,60 @@ namespace ExcelAddInDataOutput
         {
             FormOption formOption = new FormOption();
             formOption.ShowDialog();
-
         }
 
-        public void btnPopupData_Click(Microsoft.Office.Core.IRibbonControl control)
-        {
-
-            DataOutput dataOutput = new DataOutput(Globals.ThisAddIn.Application.Workbooks[1]);
-
-            dataOutput.Execute(Globals.ThisAddIn.Application.Workbooks[1]);
-        }
 
         public void btnTableConfigure_Click(Microsoft.Office.Core.IRibbonControl control)
         {
-
             FormTableOption formTableOption = new FormTableOption();
             formTableOption.ShowDialog();
+            ribbon.Invalidate();
         }
 
+        public void galleryData_Change(IRibbonControl control, string selectedId, int selectedIndex)
+        {
+            string fileName = System.IO.Directory.GetFiles(ApplicationDataPath, "*.add")[selectedIndex];
+            BaseDataBase db = DbFactory.CreateDbInstanceFromXML();
+            DataOutput dataOutput = new DataOutput(Globals.ThisAddIn.Application.Workbooks[1], db);
+            dataOutput.Execute(fileName);
         
+        }
+
+        public int galleryData_getItemCount(Office.IRibbonControl control)
+        {
+            return System.IO.Directory.GetFiles(ApplicationDataPath, "*.add").Length;
+        }
+
+        public string galleryData_getItemLabel(IRibbonControl control, int index)
+        {            
+            return Path.GetFileName(Directory.GetFiles(ApplicationDataPath, "*.add")[index]);
+        }
+
+        public string galleryData_getLabel(IRibbonControl control)
+        {
+            if (control.Id == "galleryData")
+            {
+                if (System.IO.Directory.GetFiles(ApplicationDataPath, "*.add").Length != 0)
+                    return "選択";
+                else
+                    return "未設定";
+            }
+
+            return "";
+        }
+
+        //public string GetLabel(IRibbonControl control)
+        //{
+        //    private string strText = "";
+        //    switch (control.Id)
+        //    {
+        //       case "gallery1" : strText = "Select a Device"; break;
+        //       case "button1" : strText = "Button in Gallery"; break;
+        //       default : strText = "Select a Device"; break;
+        //    }
+        //    return strText;
+        //}
+
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
             this.ribbon = ribbonUI;

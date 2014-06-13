@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using ExcelAddInDataOutput.Utility;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.Form
 {
     public partial class FormTableOption : System.Windows.Forms.Form
     {
@@ -46,7 +46,7 @@ namespace ExcelAddInDataOutput
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTableId.Text) && string.IsNullOrEmpty(txtSQL.Text))
+            if (string.IsNullOrEmpty(txtTableId.Text))
             {
                 MessageBox.Show("テーブルID入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTableId.Focus();
@@ -185,6 +185,11 @@ namespace ExcelAddInDataOutput
             txtTableId.Text = string.Empty;
             txtWhere.Text = string.Empty;
             txtSQL.Text = string.Empty;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 

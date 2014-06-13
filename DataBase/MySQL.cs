@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace ExcelAddInDataOutput.DataBase
 {
@@ -13,23 +14,23 @@ namespace ExcelAddInDataOutput.DataBase
 
             try
             {
-                if (string.IsNullOrEmpty(database))
-                {
-                    ConectionString = @"Server=" + server +
-                                            ";User Id=" + userId +
-                                            ";Password=" + password + ";";
-                    dbConnection = new SqlConnection(ConectionString);
-                }
+                //if (string.IsNullOrEmpty(database))
+                //{
+                //    ConectionString = @"Server=" + server +
+                //                            ";User Id=" + userId +
+                //                            ";Password=" + password + ";";
+                //    dbConnection = new SqlConnection(ConectionString);
+                //}
 
-                else
-                {
-                    ConectionString = @"Server=" + server +
-                                        ";User Id=" + userId +
-                                        ";Password=" + password +
-                                        ";Database=" + database + ";";
-                    dbConnection = new SqlConnection(ConectionString);
+                //else
+                //{
+                //    ConectionString = @"Server=" + server +
+                //                        ";User Id=" + userId +
+                //                        ";Password=" + password +
+                //                        ";Database=" + database + ";";
+                //    dbConnection = new SqlConnection(ConectionString);
 
-                }
+                //}
 
                 dbConnection.Open();
 
@@ -49,7 +50,7 @@ namespace ExcelAddInDataOutput.DataBase
                 dbConnection.Close();
         }
 
-        public override void getDbSchema()
+        public override DataTable getTableSchema(string tableId)
         {
             throw new NotImplementedException();
         }

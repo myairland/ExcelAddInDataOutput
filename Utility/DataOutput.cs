@@ -5,27 +5,30 @@ using System.Data;
 using System.Data.SqlClient;
 using ExcelAddInDataOutput.DataBase;
 using ExcelAddInDataOutput.Model;
+using System.IO;
 
 namespace ExcelAddInDataOutput.Utility
 {
     class DataOutput
     {
         private Workbook workbook;
+
+        private BaseDataBase db;
         
-        public DataOutput(Workbook iWorkbook)
+        public DataOutput(Workbook iWorkbook,BaseDataBase iDb)
         {
             this.workbook = iWorkbook;
+            this.db = iDb;
         }
-        public void Execute(Workbook workbook)
+
+        public void Execute(string iSettingFile)
         {
             try
             {
-                object de = DBNull.Value;
-                string abc = de.ToString();
 
-                List<TableInfo> list = GetTableInfo();
+                List<TableInfo> list = GetTableInfo(iSettingFile);
 
-                setDbInfoSQLServer(list);
+                setDbInfo(list);
 
 
 
@@ -37,11 +40,71 @@ namespace ExcelAddInDataOutput.Utility
             }
         }
 
-        List<TableInfo> GetTableInfo()
-        { 
-            List<TableInfo> list = new List<TableInfo>();
-            Worksheet sheet = (Worksheet)this.workbook.Worksheets["data"];
+        List<TableInfo> GetTableInfo(string iFileName)
+        {
+            string line;
+            string[] info;
 
+            List<TableInfo> list = new List<TableInfo>();
+
+            using (StreamReader reader = new StreamReader(iFileName))
+            {
+                while (!reader.EndOfStream)
+                {
+                    line = reader.ReadLine();
+                    TableInfo tableInfo = new TableInfo();
+
+                    info = line.Split(Const.SPLITOR);
+
+                    tableInfo.tableId = info[0];
+                    tableInfo.where = info[1];
+                    tableInfo.sql = info[2];
+
+                    list.Add(tableInfo);
+                }
+            }
+
+            return list;
+        }
+
+
+
+        public void setDbInfo(List<TableInfo> list)
+        {
+            try
+            {
+
+                foreach (TableInfo info in list)
+                {
+                    System.Data.DataTable dataTable = db.getTableSchema(info.tableId);
+
+                    info.tableName = dataTable.Rows[0]["tableName"].ToString();
+
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        FieldInfo fieldInfo = new FieldInfo();
+                        DataRow dataRow = dataTable.Rows[i];
+                        // fieldInfo.fieldId = dataRow;
+                        fieldInfo.fieldName = dataTable.Rows[i][""].ToString();
+                        // fieldInfo.IsPrimaryKey = dataTable.Rows[i][""].ToString();
+                        //fieldInfo.IsNullable = dataTable.Rows[i][""].ToString();
+                        fieldInfo.comment = dataTable.Rows[i][""].ToString();
+                        fieldInfo.type = dataTable.Rows[i][""].ToString();
+                        fieldInfo.fieldId = dataTable.Rows[i][""].ToString();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+        }
+
+        /*
+         * 
+         * 
             int row = 1;
 
             while (true)
@@ -60,183 +123,6 @@ namespace ExcelAddInDataOutput.Utility
                 row++;
             
             }
-
-            return list;
-        }
-
-        public void setDbInfoOracle( List<TableInfo> list)
-        {
-            string server = Common.GetPropertiesFromXmlByName("txtServer");
-            string database = Common.GetPropertiesFromXmlByName("txtDatabase");
-            string user = Common.GetPropertiesFromXmlByName("txtUserName");
-            string password = Common.GetPropertiesFromXmlByName("txtPassword");
-
-        
-        }
-
-        public void setDbInfoSQLServer(List<TableInfo> list)
-        {
-            string server = Common.GetPropertiesFromXmlByName("txtServer");
-            string database = Common.GetPropertiesFromXmlByName("txtDatabase");
-            string user = Common.GetPropertiesFromXmlByName("txtUserName");
-            string password = Common.GetPropertiesFromXmlByName("txtPassword");
-
-            try
-            {
-            BaseDataBase connnection = DbFactory.CreateDbInstance(Const.DB_TYPE_SQLSERVER, server, user, password, database);
-
-            connnection.open();
-
-            SqlCommand  dbCommand = new SqlCommand();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-                
-             dbCommand.Connection = (System.Data.SqlClient.SqlConnection)connnection.dbConnection;
-
-            dbCommand.CommandType = CommandType.Text;
-
-            adapter.SelectCommand = dbCommand;
-            adapter.SelectCommand = dbCommand;
-
-            foreach(TableInfo info in list)
-            {
-                dbCommand.CommandText = getSql(info.tableId);
-                DataSet dataSet = new DataSet();
-                adapter.Fill(dataSet);
-                System.Data.DataTable dataTable = dataSet.Tables[0];
-
-                info.tableName = dataTable.Rows[0][""].ToString();
-
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    FieldInfo fieldInfo = new FieldInfo();
-                    DataRow dataRow = dataTable.Rows[i];
-                   // fieldInfo.fieldId = dataRow;
-                    fieldInfo.fieldName = dataTable.Rows[i][""].ToString();
-                   // fieldInfo.IsPrimaryKey = dataTable.Rows[i][""].ToString();
-                    //fieldInfo.IsNullable = dataTable.Rows[i][""].ToString();
-                    fieldInfo.comment = dataTable.Rows[i][""].ToString();
-                    fieldInfo.type = dataTable.Rows[i][""].ToString();
-                    fieldInfo.fieldId = dataTable.Rows[i][""].ToString();
-                }
-            
-            }
-
-        
-
-
-
-                
-               
-
-            connnection.close();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-        }
-
-        private string getSql(string tableId)
-    {
-        string strSQL;
-
-        strSQL = "";
-        strSQL = strSQL + "SELECT ";
-        strSQL = strSQL + "    tableId=CASE ";
-        strSQL = strSQL + "    WHEN A.COLORDER=1 THEN ";
-        strSQL = strSQL + "        D.NAME ";
-        strSQL = strSQL + "    ELSE ";
-        strSQL = strSQL + "        '' ";
-        strSQL = strSQL + "    END, ";
-        strSQL = strSQL + "    tableName=CASE ";
-        strSQL = strSQL + "    WHEN A.COLORDER=1 THEN ";
-        strSQL = strSQL + "        ISNULL(F.VALUE,'') ";
-        strSQL = strSQL + "    ELSE ";
-        strSQL = strSQL + "        '' ";
-        strSQL = strSQL + "    END, ";
-        strSQL = strSQL + "    fieldOrder=A.COLORDER, ";
-        strSQL = strSQL + "    fieldId=A.NAME, ";
-        strSQL = strSQL + "    signal=CASE ";
-        strSQL = strSQL + "    WHEN COLUMNPROPERTY(A.ID,A.NAME,'ISIDENTITY')=1 THEN ";
-        strSQL = strSQL + "        '√' ";
-        strSQL = strSQL + "    ELSE ";
-        strSQL = strSQL + "        '' ";
-        strSQL = strSQL + "    END, ";
-        strSQL = strSQL + "    IsPrimaryKey=CASE ";
-        strSQL = strSQL + "    WHEN EXISTS ";
-        strSQL = strSQL + "                ( ";
-        strSQL = strSQL + "                SELECT ";
-        strSQL = strSQL + "                    1 ";
-        strSQL = strSQL + "                FROM ";
-        strSQL = strSQL + "                    SYSOBJECTS ";
-        strSQL = strSQL + "                WHERE ";
-        strSQL = strSQL + "                    XTYPE='PK' AND ";
-        strSQL = strSQL + "                    NAME IN ";
-        strSQL = strSQL + "                        ( ";
-        strSQL = strSQL + "                        SELECT ";
-        strSQL = strSQL + "                            NAME ";
-        strSQL = strSQL + "                        FROM ";
-        strSQL = strSQL + "                            SYSINDEXES ";
-        strSQL = strSQL + "                        WHERE ";
-        strSQL = strSQL + "                            INDID IN ";
-        strSQL = strSQL + "                                ( ";
-        strSQL = strSQL + "                                SELECT ";
-        strSQL = strSQL + "                                    INDID ";
-        strSQL = strSQL + "                                FROM ";
-        strSQL = strSQL + "                                    SYSINDEXKEYS ";
-        strSQL = strSQL + "                                WHERE ";
-        strSQL = strSQL + "                                    ID = A.ID AND ";
-        strSQL = strSQL + "                                    COLID=A.COLID ";
-        strSQL = strSQL + "                                ) ";
-        strSQL = strSQL + "                        ) ";
-        strSQL = strSQL + "                ) THEN ";
-        strSQL = strSQL + "                '√' ";
-        strSQL = strSQL + "        ELSE ";
-        strSQL = strSQL + "                '' ";
-        strSQL = strSQL + "    END, ";
-        strSQL = strSQL + "    type=B.NAME, ";
-        strSQL = strSQL + "    byteCount=A.LENGTH, ";
-        strSQL = strSQL + "    integerLength=COLUMNPROPERTY(A.ID,A.NAME,'PRECISION'), ";
-        strSQL = strSQL + "    decLength=ISNULL(COLUMNPROPERTY(A.ID,A.NAME,'SCALE'),0), ";
-        strSQL = strSQL + "    isNullable=CASE ";
-        strSQL = strSQL + "    WHEN A.ISNULLABLE=1 THEN ";
-        strSQL = strSQL + "        '√' ";
-        strSQL = strSQL + "    ELSE ";
-        strSQL = strSQL + "        '' ";
-        strSQL = strSQL + "    END, ";
-        strSQL = strSQL + "    defaultValue=ISNULL(E.TEXT,''), ";
-        strSQL = strSQL + "    fieldName=ISNULL(G.[VALUE],'') ";
-        strSQL = strSQL + "FROM ";
-        strSQL = strSQL + "    SYSCOLUMNS A ";
-        strSQL = strSQL + "    LEFT JOIN ";
-        strSQL = strSQL + "    SYSTYPES B ON ";
-        strSQL = strSQL + "    A.XUSERTYPE=B.XUSERTYPE ";
-        strSQL = strSQL + "    INNER JOIN ";
-        strSQL = strSQL + "    SYSOBJECTS D ON ";
-        strSQL = strSQL + "    A.ID=D.ID AND ";
-        strSQL = strSQL + "    D.XTYPE='U' AND ";
-        strSQL = strSQL + "    D.NAME<>'DTPROPERTIES' ";
-        strSQL = strSQL + "    LEFT JOIN ";
-        strSQL = strSQL + "    SYSCOMMENTS E ON ";
-        strSQL = strSQL + "    A.CDEFAULT=E.ID ";
-        strSQL = strSQL + "    LEFT JOIN ";
-        strSQL = strSQL + "    SYS.EXTENDED_PROPERTIES G ON ";
-        strSQL = strSQL + "    A.ID=G.MAJOR_ID AND ";
-        strSQL = strSQL + "    A.COLID=G.MINOR_ID ";
-        strSQL = strSQL + "    LEFT JOIN ";
-        strSQL = strSQL + "    SYS.EXTENDED_PROPERTIES F ON ";
-        strSQL = strSQL + "    D.ID=F.MAJOR_ID AND ";
-        strSQL = strSQL + "    F.MINOR_ID=0 ";
-        strSQL = strSQL + "WHERE   d.name='" + tableId + "'";
-        strSQL = strSQL + "ORDER BY ";
-        strSQL = strSQL + "    A.ID, ";
-        strSQL = strSQL + "    A.COLORDER ";
-        
-
-        return strSQL;
-    }
-        /*
          *   range.NumberFormatLocal = "@";     //设置单元格格式为文本 
 
 range = (Range)worksheet.get_Range("A1", "E1");     //获取Excel多个单元格区域：本例做为Excel表头

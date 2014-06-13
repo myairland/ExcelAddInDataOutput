@@ -12,7 +12,7 @@ using System.Data.OracleClient;
 using ExcelAddInDataOutput.DataBase;
 using ExcelAddInDataOutput.Utility;
 
-namespace ExcelAddInDataOutput
+namespace ExcelAddInDataOutput.Form
 {
     public partial class FormOption : System.Windows.Forms.Form
     {
@@ -52,7 +52,7 @@ namespace ExcelAddInDataOutput
         private void btnTestConnection_Click(object sender, EventArgs e)
         {
             BaseDataBase con = DbFactory.CreateDbInstance(ConnectionType, txtServer.Text, 
-                                                    txtUserName.Text, txtPassword.Text, 
+                                                    txtUserId.Text, txtPassword.Text, 
                                                     txtDatabase.Text);
             if (con.open())
             {
