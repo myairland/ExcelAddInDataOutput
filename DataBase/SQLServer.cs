@@ -14,8 +14,7 @@ namespace ExcelAddInDataOutput.DataBase
             this.userId = userId;
             this.password = password;
             this.server = server;
-            this.database = database;
-            
+            this.database = database;           
         
         }
 
@@ -199,6 +198,14 @@ namespace ExcelAddInDataOutput.DataBase
         
         }
 
+        public override string getTableName(string tableId)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override System.Data.Common.DbDataAdapter getDbDataAdapter()
+        {
+            return new SqlDataAdapter();
+        }
     }
 }
