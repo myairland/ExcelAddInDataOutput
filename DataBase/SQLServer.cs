@@ -155,10 +155,7 @@ namespace ExcelAddInDataOutput.DataBase
             strSQL = strSQL + "        ELSE ";
             strSQL = strSQL + "                'False' ";
             strSQL = strSQL + "    END, ";
-            strSQL = strSQL + "    type=B.NAME, ";
-            strSQL = strSQL + "    byteCount=A.LENGTH, ";
-            strSQL = strSQL + "    integerLength=COLUMNPROPERTY(A.ID,A.NAME,'PRECISION'), ";
-            strSQL = strSQL + "    decLength=ISNULL(COLUMNPROPERTY(A.ID,A.NAME,'SCALE'),0), ";
+            strSQL = strSQL + "    dataType=case when isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0) = 0 then b.name else b.name + '(' + CAST(COLUMNPROPERTY(a.id,a.name,'PRECISION')AS NVARCHAR(100))+ ',' + CAST(isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0)AS NVARCHAR(100)) + ')' end ,  ";
             strSQL = strSQL + "    isNullable=CASE ";
             strSQL = strSQL + "    WHEN A.ISNULLABLE=1 THEN ";
             strSQL = strSQL + "        'True' ";
@@ -200,7 +197,34 @@ namespace ExcelAddInDataOutput.DataBase
 
         public override string getTableName(string tableId)
         {
-            throw new NotImplementedException();
+            string sql = string.Empty;
+            string tableName;
+
+            sql = sql + "SELECT ";
+            sql = sql + "    CAST(ISNULL(f.[value],'') AS NVARCHAR(100)) AS table_name ";
+            sql = sql + "FROM ";
+            sql = sql + "    sys.objects c ";
+            sql = sql + "    LEFT JOIN ";
+            sql = sql + "    sys.extended_properties f ON ";
+            sql = sql + "    f.major_id=c.object_id AND ";
+            sql = sql + "    f.minor_id=0 AND ";
+            sql = sql + "    f.class=1 ";
+            sql = sql + "WHERE ";
+            sql = sql + "    c.type='u' AND ";
+            sql = sql + "    c.name = '"+ tableId + "' ";
+
+            DataTable db = this.GetDataTable(sql);
+
+            if (db != null && db.Rows.Count > 0)
+            {
+                tableName = db.Rows[0]["tableName"].ToString();
+            }
+            else
+            {
+                tableName = "";
+            }
+
+            return tableName;
         }
 
         public override System.Data.Common.DbDataAdapter getDbDataAdapter()
