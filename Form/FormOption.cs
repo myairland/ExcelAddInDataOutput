@@ -51,8 +51,8 @@ namespace ExcelAddInDataOutput.Form
 
         private void btnTestConnection_Click(object sender, EventArgs e)
         {
-            BaseDataBase con = DbFactory.CreateDbInstance(ConnectionType, txtServer.Text, 
-                                                    txtUserId.Text, txtPassword.Text, 
+            BaseDataBase con = DbFactory.CreateDbInstance(ConnectionType, 
+                                                    txtUserId.Text, txtPassword.Text, txtServer.Text, 
                                                     txtDatabase.Text);
             if (con.open())
             {

@@ -60,45 +60,8 @@ namespace ExcelAddInDataOutput.DataBase
                 dbConnection.Close();
         }
 
-
-        public override DataTable getTableSchema(string tableId)
+        public override string getTableSchemaSQL(string tableId)
         {
-            DataTable dataTable = new DataTable();
-
-            try
-            {
-                this.open();
-
-                SqlCommand dbCommand = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-
-                dbCommand.Connection = (System.Data.SqlClient.SqlConnection)dbConnection;
-
-                dbCommand.CommandType = CommandType.Text;
-                adapter.SelectCommand = dbCommand;
-
-                dbCommand.CommandText = getTableSQL(tableId);
-
-                DataSet dataSet = new DataSet();
-
-                adapter.Fill(dataSet);
-
-                dataTable = dataSet.Tables[0];
-
-                this.close();
-            }
-            catch
-            {
-                this.close();
-            }
-
-            return dataTable;
- 
-        }
-
-        private string getTableSQL(string tableId)
-        {
-
             string strSQL;
 
             strSQL = "";
@@ -195,11 +158,10 @@ namespace ExcelAddInDataOutput.DataBase
         
         }
 
-        public override string getTableName(string tableId)
-        {
-            string sql = string.Empty;
-            string tableName;
 
+        public override string getTableNameSQL(string tableId)
+        {
+            string sql= string.Empty;
             sql = sql + "SELECT ";
             sql = sql + "    CAST(ISNULL(f.[value],'') AS NVARCHAR(100)) AS table_name ";
             sql = sql + "FROM ";
@@ -211,21 +173,10 @@ namespace ExcelAddInDataOutput.DataBase
             sql = sql + "    f.class=1 ";
             sql = sql + "WHERE ";
             sql = sql + "    c.type='u' AND ";
-            sql = sql + "    c.name = '"+ tableId + "' ";
-
-            DataTable db = this.GetDataTable(sql);
-
-            if (db != null && db.Rows.Count > 0)
-            {
-                tableName = db.Rows[0]["tableName"].ToString();
-            }
-            else
-            {
-                tableName = "";
-            }
-
-            return tableName;
+            sql = sql + "    c.name = '" + tableId + "' ";
+            return sql;
         }
+
 
         public override System.Data.Common.DbDataAdapter getDbDataAdapter()
         {

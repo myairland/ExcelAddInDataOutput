@@ -23,16 +23,18 @@ namespace ExcelAddInDataOutput.DataBase
 
         public abstract void close();
 
-        public abstract DataTable getTableSchema(string tableId);
 
-        public abstract string getTableName(string tableId);
+        public abstract DbDataAdapter getDbDataAdapter();
+
+        public abstract string getTableSchemaSQL(string tableId);
+
+        public abstract string getTableNameSQL(string tableId);
 
         public virtual DataTable GetDataTable(string sqlString)
         {
             DbCommand vlCommand = default(DbCommand);
             DbDataAdapter vlAdapter = default(DbDataAdapter);
             DataTable vlDataTable = default(DataTable);
-
 
             vlCommand = dbConnection.CreateCommand();
             vlCommand.CommandText = sqlString;
@@ -48,7 +50,39 @@ namespace ExcelAddInDataOutput.DataBase
             return vlDataTable;
         }
 
-        public abstract DbDataAdapter getDbDataAdapter();
+        public virtual DataTable getTableSchema(string tableId)
+        {
+            DataTable dataTable = new DataTable();
+
+            string sql = getTableSchemaSQL(tableId);
+
+            dataTable = this.GetDataTable(sql);
+
+            return dataTable;
+
+        }
+
+        public virtual string getTableName(string tableId)
+        {
+            string sql = string.Empty;
+            string tableName;
+
+            sql = getTableNameSQL(tableId);
+
+            DataTable db = this.GetDataTable(sql);
+
+            if (db != null && db.Rows.Count > 0)
+            {
+                tableName = db.Rows[0]["tableName"].ToString();
+            }
+            else
+            {
+                tableName = "";
+            }
+
+            return tableName;
+        }
+
 
     }
 }

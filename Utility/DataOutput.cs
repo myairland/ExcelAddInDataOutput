@@ -11,13 +11,13 @@ namespace ExcelAddInDataOutput.Utility
 {
     class DataOutput
     {
-        private Workbook workbook;
+        private Application application;
 
         private BaseDataBase db;
-        
-        public DataOutput(Workbook iWorkbook,BaseDataBase iDb)
+
+        public DataOutput(Application iApp, BaseDataBase iDb)
         {
-            this.workbook = iWorkbook;
+            this.application = iApp;
             this.db = iDb;
         }
 
@@ -25,17 +25,23 @@ namespace ExcelAddInDataOutput.Utility
         {
             try
             {
+                db.open();
 
                 List<TableInfo> list = GetTableInfo(iSettingFile);
 
                 setDbInfo(list);
 
+                ExcelOutput output = new ExcelOutput(application, db);
 
+                output.Execute(list);
+
+                db.close();
 
      
             }
             catch (Exception ex)
             {
+                db.close();
                 Console.WriteLine(ex);
             }
         }
@@ -78,19 +84,27 @@ namespace ExcelAddInDataOutput.Utility
                 {
                     System.Data.DataTable dataTable = db.getTableSchema(info.tableId);
 
-                    info.tableName = dataTable.Rows[0]["tableName"].ToString();
+                    info.tableName = db.getTableName(info.tableId);
 
                     for (int i = 0; i < dataTable.Rows.Count; i++)
                     {
                         FieldInfo fieldInfo = new FieldInfo();
                         DataRow dataRow = dataTable.Rows[i];
-                        // fieldInfo.fieldId = dataRow;
-                        fieldInfo.fieldName = dataTable.Rows[i][""].ToString();
-                        // fieldInfo.IsPrimaryKey = dataTable.Rows[i][""].ToString();
-                        //fieldInfo.IsNullable = dataTable.Rows[i][""].ToString();
-                        fieldInfo.comment = dataTable.Rows[i][""].ToString();
-                        fieldInfo.type = dataTable.Rows[i][""].ToString();
-                        fieldInfo.fieldId = dataTable.Rows[i][""].ToString();
+                        fieldInfo.fieldId = dataTable.Rows[i]["fieldId"].ToString();
+                        fieldInfo.fieldName = dataTable.Rows[i]["fieldName"].ToString();
+                        fieldInfo.dataType = dataTable.Rows[i]["dataType"].ToString();
+
+                        if (dataTable.Rows[i]["isNullable"].ToString() == "True")
+                            fieldInfo.IsNullable = true;
+                        else
+                            fieldInfo.IsNullable = false;
+
+                        if (dataTable.Rows[i]["IsPrimaryKey"].ToString() == "True")
+                            fieldInfo.IsPrimaryKey = true;
+                        else
+                            fieldInfo.IsPrimaryKey = false;                       
+
+                        info.FieldList.Add(fieldInfo);
                     }
 
                 }

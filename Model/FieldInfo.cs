@@ -9,13 +9,9 @@ namespace ExcelAddInDataOutput.Model
     {
         public string fieldId;
         public string fieldName;
-        public bool? IsPrimaryKey;
-        public bool? IsNullable;
-        public string comment;
-        public string type;
-        public int? integerLength;
-        public int? decLength;
-        
+        public bool IsPrimaryKey;
+        public bool IsNullable;
+        public string dataType;        
 
     }
 }

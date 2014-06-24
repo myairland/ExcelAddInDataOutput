@@ -19,6 +19,7 @@ namespace ExcelAddInDataOutput.DataBase
                     db = new SQLServer(userid, password, server, database);
                     break;
                 case Const.DB_TYPE_MYSQL:
+                    db = new ExcelAddInDataOutput.DataBase.MySQL(userid, password, server, database);
                     break;
                 default:
                     break;

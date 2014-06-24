@@ -56,7 +56,7 @@ namespace ExcelAddInDataOutput
         {
             string fileName = System.IO.Directory.GetFiles(ApplicationDataPath, "*.add")[selectedIndex];
             BaseDataBase db = DbFactory.CreateDbInstanceFromXML();
-            DataOutput dataOutput = new DataOutput(Globals.ThisAddIn.Application.Workbooks[1], db);
+            DataOutput dataOutput = new DataOutput(Globals.ThisAddIn.Application, db);
             dataOutput.Execute(fileName);
         
         }

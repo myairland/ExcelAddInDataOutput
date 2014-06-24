@@ -27,6 +27,8 @@ namespace ExcelAddInDataOutput.DataBase
                 ConectionString = String.Format("server={0};user id={1}; password={2}; database={3}; pooling=false",
                                 server, userId, password, database);
 
+                dbConnection = new MySqlConnection(ConectionString);
+
                 dbConnection.Open();
 
             }
@@ -44,36 +46,50 @@ namespace ExcelAddInDataOutput.DataBase
                 dbConnection.Close();
         }
 
-        public override DataTable getTableSchema(string tableId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string getTableName(string tableId)
-        {
-            string sql;
-            string tableName;
-
-            sql = "Select TABLE_COMMENT tableName from INFORMATION_SCHEMA.TABLES Where table_schema = '" + database + "AND table_name LIKE '"+tableId+"'";
-
-            DataTable db = this.GetDataTable(sql);
-
-            if(db != null && db.Rows.Count  > 0)
-            {
-                tableName = db.Rows[0]["tableName"].ToString();
-            }
-            else
-            {
-                tableName= "";
-            }
-
-            return tableName;
-        }
-
         public override System.Data.Common.DbDataAdapter getDbDataAdapter()
         {
             return new MySql.Data.MySqlClient.MySqlDataAdapter();
         }
+
+
+        public override string getTableNameSQL(string tableId)
+        {
+            string sql;
+            sql = "Select TABLE_COMMENT tableName from INFORMATION_SCHEMA.TABLES Where table_schema = '" + database + "' AND table_name LIKE '" + tableId + "'";
+            return sql;
+        }
+
+        public override string getTableSchemaSQL(string tableId)
+        {
+            string strSQL= string.Empty;
+
+            strSQL = strSQL + "SELECT ";
+            strSQL = strSQL + "    column_name AS fieldId, ";
+            strSQL = strSQL + "    column_comment AS fieldName, ";
+            strSQL = strSQL + "    CASE ";
+            strSQL = strSQL + "    WHEN IS_NULLABLE = 'YES' THEN ";
+            strSQL = strSQL + "        'True' ";
+            strSQL = strSQL + "    ELSE ";
+            strSQL = strSQL + "        'False' ";
+            strSQL = strSQL + "    END AS isNullable, ";
+            strSQL = strSQL + "    COLUMN_TYPE AS dataType, ";
+            strSQL = strSQL + "    CASE ";
+            strSQL = strSQL + "    WHEN COLUMN_key = 'PRI' THEN ";
+            strSQL = strSQL + "        'True' ";
+            strSQL = strSQL + "    ELSE ";
+            strSQL = strSQL + "        'False' ";
+            strSQL = strSQL + "    END AS IsPrimaryKey ";
+            strSQL = strSQL + "FROM ";
+            strSQL = strSQL + "    INFORMATION_SCHEMA.COLUMNS ";
+            strSQL = strSQL + "WHERE ";
+            strSQL = strSQL + "    TABLE_SCHEMA = 'musashi' AND ";
+            strSQL = strSQL + "    TABLE_NAME = 'ORDER_DET' ";
+            strSQL = strSQL + "ORDER BY ";
+            strSQL = strSQL + "    ORDINAL_POSITION ";
+
+            return strSQL;
+        }
+
 
         /*
 

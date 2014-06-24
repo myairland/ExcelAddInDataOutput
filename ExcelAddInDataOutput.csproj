@@ -211,6 +211,7 @@
     <Compile Include="Form\FormOption.Designer.cs">
       <DependentUpon>FormOption.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ExcelOutput.cs" />
     <Compile Include="Utility\FormSerialisor.cs" />
     <Compile Include="Form\FormSave.cs">
       <SubType>Form</SubType>
