@@ -82,8 +82,8 @@ namespace ExcelAddInDataOutput.DataBase
             strSQL = strSQL + "FROM ";
             strSQL = strSQL + "    INFORMATION_SCHEMA.COLUMNS ";
             strSQL = strSQL + "WHERE ";
-            strSQL = strSQL + "    TABLE_SCHEMA = 'musashi' AND ";
-            strSQL = strSQL + "    TABLE_NAME = 'ORDER_DET' ";
+            strSQL = strSQL + "    TABLE_SCHEMA = '" + database + "'  AND ";
+            strSQL = strSQL + "    TABLE_NAME = '" + tableId + "' ";
             strSQL = strSQL + "ORDER BY ";
             strSQL = strSQL + "    ORDINAL_POSITION ";
 

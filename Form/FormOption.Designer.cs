@@ -41,8 +41,21 @@
             this.lblServer = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnTestConnection = new System.Windows.Forms.Button();
-            this.gbStyle = new System.Windows.Forms.GroupBox();
+            this.btnFont = new System.Windows.Forms.Button();
+            this.btnHeaderColor = new System.Windows.Forms.Button();
+            this.lblFont = new System.Windows.Forms.Label();
+            this.lblHeaderColor = new System.Windows.Forms.Label();
+            this.txtNoData = new System.Windows.Forms.TextBox();
+            this.lblNoData = new System.Windows.Forms.Label();
+            this.cbFieldName = new System.Windows.Forms.CheckBox();
+            this.gbHeaderStyle = new System.Windows.Forms.GroupBox();
+            this.gbRow = new System.Windows.Forms.GroupBox();
+            this.cbIsNullable = new System.Windows.Forms.CheckBox();
+            this.cbIsPrimaryKey = new System.Windows.Forms.CheckBox();
+            this.cbDataType = new System.Windows.Forms.CheckBox();
             this.gbDatabase.SuspendLayout();
+            this.gbHeaderStyle.SuspendLayout();
+            this.gbRow.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -99,14 +112,14 @@
             // 
             // txtDatabase
             // 
-            this.txtDatabase.Location = new System.Drawing.Point(292, 59);
+            this.txtDatabase.Location = new System.Drawing.Point(320, 56);
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.Size = new System.Drawing.Size(97, 21);
             this.txtDatabase.TabIndex = 4;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(292, 18);
+            this.txtPassword.Location = new System.Drawing.Point(320, 18);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(97, 21);
             this.txtPassword.TabIndex = 2;
@@ -171,21 +184,142 @@
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
             // 
-            // gbStyle
+            // btnFont
             // 
-            this.gbStyle.Location = new System.Drawing.Point(15, 177);
-            this.gbStyle.Name = "gbStyle";
-            this.gbStyle.Size = new System.Drawing.Size(607, 234);
-            this.gbStyle.TabIndex = 7;
-            this.gbStyle.TabStop = false;
-            this.gbStyle.Text = "スタイル";
+            this.btnFont.Location = new System.Drawing.Point(18, 20);
+            this.btnFont.Name = "btnFont";
+            this.btnFont.Size = new System.Drawing.Size(85, 24);
+            this.btnFont.TabIndex = 0;
+            this.btnFont.Text = "フォント";
+            this.btnFont.UseVisualStyleBackColor = true;
+            this.btnFont.Click += new System.EventHandler(this.btnFont_Click);
+            // 
+            // btnHeaderColor
+            // 
+            this.btnHeaderColor.Location = new System.Drawing.Point(18, 63);
+            this.btnHeaderColor.Name = "btnHeaderColor";
+            this.btnHeaderColor.Size = new System.Drawing.Size(85, 24);
+            this.btnHeaderColor.TabIndex = 0;
+            this.btnHeaderColor.Text = "ヘッダ色";
+            this.btnHeaderColor.UseVisualStyleBackColor = true;
+            this.btnHeaderColor.Click += new System.EventHandler(this.btnHeaderColor_Click);
+            // 
+            // lblFont
+            // 
+            this.lblFont.AutoSize = true;
+            this.lblFont.Location = new System.Drawing.Point(123, 26);
+            this.lblFont.Name = "lblFont";
+            this.lblFont.Size = new System.Drawing.Size(0, 12);
+            this.lblFont.TabIndex = 1;
+            // 
+            // lblHeaderColor
+            // 
+            this.lblHeaderColor.AutoSize = true;
+            this.lblHeaderColor.Location = new System.Drawing.Point(123, 63);
+            this.lblHeaderColor.Name = "lblHeaderColor";
+            this.lblHeaderColor.Size = new System.Drawing.Size(0, 12);
+            this.lblHeaderColor.TabIndex = 2;
+            // 
+            // txtNoData
+            // 
+            this.txtNoData.Location = new System.Drawing.Point(308, 305);
+            this.txtNoData.Name = "txtNoData";
+            this.txtNoData.Size = new System.Drawing.Size(225, 21);
+            this.txtNoData.TabIndex = 3;
+            this.txtNoData.Text = "データなし";
+            // 
+            // lblNoData
+            // 
+            this.lblNoData.AutoSize = true;
+            this.lblNoData.Location = new System.Drawing.Point(312, 279);
+            this.lblNoData.Name = "lblNoData";
+            this.lblNoData.Size = new System.Drawing.Size(107, 12);
+            this.lblNoData.TabIndex = 4;
+            this.lblNoData.Text = "データがない場合:";
+            // 
+            // cbFieldName
+            // 
+            this.cbFieldName.AutoSize = true;
+            this.cbFieldName.Checked = true;
+            this.cbFieldName.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFieldName.Location = new System.Drawing.Point(28, 37);
+            this.cbFieldName.Name = "cbFieldName";
+            this.cbFieldName.Size = new System.Drawing.Size(96, 16);
+            this.cbFieldName.TabIndex = 5;
+            this.cbFieldName.Text = "フィールド名";
+            this.cbFieldName.UseVisualStyleBackColor = true;
+            // 
+            // gbHeaderStyle
+            // 
+            this.gbHeaderStyle.Controls.Add(this.btnFont);
+            this.gbHeaderStyle.Controls.Add(this.lblFont);
+            this.gbHeaderStyle.Controls.Add(this.btnHeaderColor);
+            this.gbHeaderStyle.Controls.Add(this.lblHeaderColor);
+            this.gbHeaderStyle.Location = new System.Drawing.Point(16, 166);
+            this.gbHeaderStyle.Name = "gbHeaderStyle";
+            this.gbHeaderStyle.Size = new System.Drawing.Size(556, 98);
+            this.gbHeaderStyle.TabIndex = 6;
+            this.gbHeaderStyle.TabStop = false;
+            this.gbHeaderStyle.Text = "groupBox1";
+            // 
+            // gbRow
+            // 
+            this.gbRow.Controls.Add(this.cbIsNullable);
+            this.gbRow.Controls.Add(this.cbIsPrimaryKey);
+            this.gbRow.Controls.Add(this.cbDataType);
+            this.gbRow.Controls.Add(this.cbFieldName);
+            this.gbRow.Location = new System.Drawing.Point(16, 270);
+            this.gbRow.Name = "gbRow";
+            this.gbRow.Size = new System.Drawing.Size(235, 137);
+            this.gbRow.TabIndex = 7;
+            this.gbRow.TabStop = false;
+            this.gbRow.Text = "行";
+            // 
+            // cbIsNullable
+            // 
+            this.cbIsNullable.AutoSize = true;
+            this.cbIsNullable.Checked = true;
+            this.cbIsNullable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsNullable.Location = new System.Drawing.Point(28, 104);
+            this.cbIsNullable.Name = "cbIsNullable";
+            this.cbIsNullable.Size = new System.Drawing.Size(48, 16);
+            this.cbIsNullable.TabIndex = 5;
+            this.cbIsNullable.Text = "NULL";
+            this.cbIsNullable.UseVisualStyleBackColor = true;
+            // 
+            // cbIsPrimaryKey
+            // 
+            this.cbIsPrimaryKey.AutoSize = true;
+            this.cbIsPrimaryKey.Checked = true;
+            this.cbIsPrimaryKey.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsPrimaryKey.Location = new System.Drawing.Point(28, 82);
+            this.cbIsPrimaryKey.Name = "cbIsPrimaryKey";
+            this.cbIsPrimaryKey.Size = new System.Drawing.Size(60, 16);
+            this.cbIsPrimaryKey.TabIndex = 5;
+            this.cbIsPrimaryKey.Text = "主キー";
+            this.cbIsPrimaryKey.UseVisualStyleBackColor = true;
+            // 
+            // cbDataType
+            // 
+            this.cbDataType.AutoSize = true;
+            this.cbDataType.Checked = true;
+            this.cbDataType.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbDataType.Location = new System.Drawing.Point(28, 59);
+            this.cbDataType.Name = "cbDataType";
+            this.cbDataType.Size = new System.Drawing.Size(96, 16);
+            this.cbDataType.TabIndex = 5;
+            this.cbDataType.Text = "データタイプ";
+            this.cbDataType.UseVisualStyleBackColor = true;
             // 
             // FormOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 467);
-            this.Controls.Add(this.gbStyle);
+            this.Controls.Add(this.gbRow);
+            this.Controls.Add(this.lblNoData);
+            this.Controls.Add(this.txtNoData);
+            this.Controls.Add(this.gbHeaderStyle);
             this.Controls.Add(this.btnTestConnection);
             this.Controls.Add(this.gbDatabase);
             this.Controls.Add(this.btnSave);
@@ -197,7 +331,12 @@
             this.Load += new System.EventHandler(this.FormOption_Load);
             this.gbDatabase.ResumeLayout(false);
             this.gbDatabase.PerformLayout();
+            this.gbHeaderStyle.ResumeLayout(false);
+            this.gbHeaderStyle.PerformLayout();
+            this.gbRow.ResumeLayout(false);
+            this.gbRow.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -216,6 +355,17 @@
         private System.Windows.Forms.Label lblServer;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Button btnTestConnection;
-        private System.Windows.Forms.GroupBox gbStyle;
+        private System.Windows.Forms.Label lblNoData;
+        private System.Windows.Forms.TextBox txtNoData;
+        private System.Windows.Forms.Label lblHeaderColor;
+        private System.Windows.Forms.Label lblFont;
+        private System.Windows.Forms.Button btnHeaderColor;
+        private System.Windows.Forms.Button btnFont;
+        private System.Windows.Forms.GroupBox gbHeaderStyle;
+        private System.Windows.Forms.CheckBox cbFieldName;
+        private System.Windows.Forms.GroupBox gbRow;
+        private System.Windows.Forms.CheckBox cbIsNullable;
+        private System.Windows.Forms.CheckBox cbIsPrimaryKey;
+        private System.Windows.Forms.CheckBox cbDataType;
     }
 }

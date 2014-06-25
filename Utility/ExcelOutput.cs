@@ -44,19 +44,22 @@ namespace ExcelAddInDataOutput.Utility
                     worksheet.Range["A" + row.ToString()].Value = tableNameDisplay;
 
                     // column 
+                    int colNo = 1;
                     foreach (FieldInfo fieldInfo in tableInfo.FieldList)
                     {
-                        worksheet.Range["1" , (row + 1).ToString()].Value = fieldInfo.fieldId;
-                        row = row + 1;
-                        worksheet.Range["1" , (row + 2).ToString()].Value = fieldInfo.fieldName;
-                        row = row + 1;
-                        worksheet.Range["1" , (row + 3).ToString()].Value = fieldInfo.dataType;
-                        row = row + 1;
-                        worksheet.Range["1" , (row + 4).ToString()].Value = fieldInfo.IsPrimaryKey;
-                        row = row + 1;
-                        worksheet.Range["1" , (row + 5).ToString()].Value = fieldInfo.IsNullable;
+                        worksheet.Cells[(row + 1), colNo] = fieldInfo.fieldId;
+
+                        worksheet.Cells[(row + 2), colNo] = fieldInfo.fieldName;
+
+                        worksheet.Cells[(row + 3), colNo] = fieldInfo.dataType;
+
+                        worksheet.Cells[(row + 4), colNo] = fieldInfo.IsPrimaryKey;
+
+                        worksheet.Cells[(row + 5), colNo] = fieldInfo.IsNullable;
+
+                        colNo = colNo + 1;
                     }
-                    row = row + 5;
+                    row = row + 6;
 
                     // data
                     string strSql;
@@ -70,7 +73,7 @@ namespace ExcelAddInDataOutput.Utility
                         int column = 1;
                         foreach (DataColumn col in data.Columns)
                         {
-                            worksheet.Range[(column++).ToString(), row.ToString()].Value = dataRow[col].ToString();
+                            worksheet.Cells[row, (column++)] = dataRow[col].ToString();
                         }
 
                         row = row + 1;

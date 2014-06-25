@@ -69,7 +69,43 @@ namespace ExcelAddInDataOutput.Form
         private void cbDbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ConnectionType = cbDbType.Text.Substring(0, 1);
-        }        
+        }
+
+        private void btnFont_Click(object sender, EventArgs e)
+        {
+
+            FontDialog fontDialog = new FontDialog();
+            FontConverter cvt = new FontConverter();
+
+            fontDialog.ShowEffects = true;
+            fontDialog.ShowColor = true;
+
+            if (lblFont.Text != "")
+                fontDialog.Font = cvt.ConvertFromString(lblFont.Text) as Font;
+
+            if (DialogResult.OK == fontDialog.ShowDialog())
+            {                
+                lblFont.Text = cvt.ConvertToString(fontDialog.Font);
+            }
+        }
+
+        private void btnHeaderColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            ColorConverter cvt = new ColorConverter();
+
+            if (lblHeaderColor.Text != "")
+                colorDialog.Color = (Color)cvt.ConvertFromString(lblHeaderColor.Text);
+
+            if (DialogResult.OK == colorDialog.ShowDialog())
+            {                
+                lblHeaderColor.Text = cvt.ConvertToString(colorDialog.Color);
+                lblHeaderColor.BackColor = colorDialog.Color;
+            }
+            
+        }
+
+ 
 
     }
 }

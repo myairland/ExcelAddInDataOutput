@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTableId = new System.Windows.Forms.Label();
             this.lblWhere = new System.Windows.Forms.Label();
             this.lblSQL = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             this.lblTableId.AutoSize = true;
             this.lblTableId.Location = new System.Drawing.Point(321, 16);
             this.lblTableId.Name = "lblTableId";
-            this.lblTableId.Size = new System.Drawing.Size(54, 12);
+            this.lblTableId.Size = new System.Drawing.Size(65, 12);
             this.lblTableId.TabIndex = 0;
             this.lblTableId.Text = "テーブルID";
             // 
@@ -65,7 +65,7 @@
             this.lblWhere.AutoSize = true;
             this.lblWhere.Location = new System.Drawing.Point(351, 61);
             this.lblWhere.Name = "lblWhere";
-            this.lblWhere.Size = new System.Drawing.Size(36, 12);
+            this.lblWhere.Size = new System.Drawing.Size(35, 12);
             this.lblWhere.TabIndex = 0;
             this.lblWhere.Text = "Where";
             // 
@@ -74,7 +74,7 @@
             this.lblSQL.AutoSize = true;
             this.lblSQL.Location = new System.Drawing.Point(351, 101);
             this.lblSQL.Name = "lblSQL";
-            this.lblSQL.Size = new System.Drawing.Size(38, 12);
+            this.lblSQL.Size = new System.Drawing.Size(35, 12);
             this.lblSQL.TabIndex = 0;
             this.lblSQL.Text = "SQL文";
             // 
@@ -82,14 +82,14 @@
             // 
             this.txtTableId.Location = new System.Drawing.Point(392, 13);
             this.txtTableId.Name = "txtTableId";
-            this.txtTableId.Size = new System.Drawing.Size(100, 19);
+            this.txtTableId.Size = new System.Drawing.Size(100, 21);
             this.txtTableId.TabIndex = 5;
             // 
             // txtWhere
             // 
             this.txtWhere.Location = new System.Drawing.Point(392, 58);
             this.txtWhere.Name = "txtWhere";
-            this.txtWhere.Size = new System.Drawing.Size(100, 19);
+            this.txtWhere.Size = new System.Drawing.Size(100, 21);
             this.txtWhere.TabIndex = 6;
             // 
             // txtSQL
@@ -104,14 +104,14 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TABLE_ID,
@@ -231,9 +231,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(390, 43);
+            this.label1.Location = new System.Drawing.Point(398, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 12);
+            this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 13;
             this.label1.Text = "ex:FIELD =\"AA\"";
             // 
