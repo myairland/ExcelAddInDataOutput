@@ -40,6 +40,20 @@ namespace ExcelAddInDataOutput.Form
                 Directory.CreateDirectory(ApplicationDataPath);
 
             FormSerialisor.Deserialise(this, ApplicationDataPath + @"\" + Const.SETTING_XML);
+
+            restoreLabelStr();
+        }
+
+        private void restoreLabelStr()
+        {
+            FontConverter fontConverter = new FontConverter();
+            ColorConverter colorCovert = new ColorConverter();
+
+
+            lblSample.Font = fontConverter.ConvertFromString(txtFont.Text) as Font;
+            lblSample.ForeColor = (Color)colorCovert.ConvertFromString(txtFontColor.Text);
+
+            lblSample.BackColor = (Color)colorCovert.ConvertFromString(txtHeaderColor.Text);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -75,32 +89,42 @@ namespace ExcelAddInDataOutput.Form
         {
 
             FontDialog fontDialog = new FontDialog();
-            FontConverter cvt = new FontConverter();
+            FontConverter fontConverter = new FontConverter();
+            ColorConverter colorCovert = new ColorConverter();
 
             fontDialog.ShowEffects = true;
             fontDialog.ShowColor = true;
 
-            if (lblFont.Text != "")
-                fontDialog.Font = cvt.ConvertFromString(lblFont.Text) as Font;
+            if (lblSample.Text != "")
+            {
+                fontDialog.Font = fontConverter.ConvertFromString(lblSample.Text) as Font;
+                fontDialog.Color = lblSample.ForeColor;
+            }
 
             if (DialogResult.OK == fontDialog.ShowDialog())
-            {                
-                lblFont.Text = cvt.ConvertToString(fontDialog.Font);
+            {
+                txtFont.Text = fontConverter.ConvertToString(fontDialog.Font);
+                txtFontColor.Text = colorCovert.ConvertToString(fontDialog.Color);
+
+                lblSample.Font = fontDialog.Font;
+                lblSample.ForeColor = fontDialog.Color;                
             }
         }
 
         private void btnHeaderColor_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-            ColorConverter cvt = new ColorConverter();
+            ColorConverter colorCovert = new ColorConverter();
 
-            if (lblHeaderColor.Text != "")
-                colorDialog.Color = (Color)cvt.ConvertFromString(lblHeaderColor.Text);
+            if (lblSample.Text != "")
+                colorDialog.Color = lblSample.BackColor;
 
             if (DialogResult.OK == colorDialog.ShowDialog())
-            {                
-                lblHeaderColor.Text = cvt.ConvertToString(colorDialog.Color);
-                lblHeaderColor.BackColor = colorDialog.Color;
+            {
+                txtHeaderColor.Text = colorCovert.ConvertToString(colorDialog.Color);
+
+                lblSample.BackColor = colorDialog.Color;
+               
             }
             
         }

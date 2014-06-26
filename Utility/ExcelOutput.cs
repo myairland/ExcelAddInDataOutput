@@ -6,6 +6,7 @@ using Microsoft.Office.Interop.Excel;
 using ExcelAddInDataOutput.Model;
 using ExcelAddInDataOutput.DataBase;
 using System.Data;
+using System.Drawing;
 
 namespace ExcelAddInDataOutput.Utility
 {
@@ -15,10 +16,47 @@ namespace ExcelAddInDataOutput.Utility
 
         private BaseDataBase db;
 
+        private System.Drawing.Font font;
+
+        private Color fontColor;
+
+        private Color headerColor;
+
         public ExcelOutput(Application iApp, BaseDataBase iDb)
         {
             this.application = iApp;
             this.db = iDb;
+            initStyleFromXml();
+        }
+
+        private void initStyleFromXml()
+        {
+            FontConverter fontConverter = new FontConverter();
+            ColorConverter colorCovert = new ColorConverter();
+            string fontColorStr = Common.GetPropertiesFromXmlByName(Const.XML_FONT_COLOR);
+            string fontStr = Common.GetPropertiesFromXmlByName(Const.XML_FONT);
+            string headerColorStr = Common.GetPropertiesFromXmlByName(Const.XML_HEADER_COLOR);
+
+            if (fontStr != "")
+            {
+                font = fontConverter.ConvertFromString(fontStr) as System.Drawing.Font;
+                fontColor = (Color)colorCovert.ConvertFromString(fontColorStr);
+            }
+            else
+            {
+                font = SystemFonts.DefaultFont;
+                fontColor = Color.Black;
+            }
+
+            if (headerColorStr != "")
+            {
+                headerColor = (Color)colorCovert.ConvertFromString(headerColorStr);
+            }
+            else
+            {
+                headerColor = Color.LightBlue;
+            }
+           
         }
 
         public bool Execute(List<TableInfo> list)
@@ -47,6 +85,7 @@ namespace ExcelAddInDataOutput.Utility
                     int colNo = 1;
                     foreach (FieldInfo fieldInfo in tableInfo.FieldList)
                     {
+                        
                         worksheet.Cells[(row + 1), colNo] = fieldInfo.fieldId;
 
                         worksheet.Cells[(row + 2), colNo] = fieldInfo.fieldName;
@@ -57,6 +96,12 @@ namespace ExcelAddInDataOutput.Utility
 
                         worksheet.Cells[(row + 5), colNo] = fieldInfo.IsNullable;
 
+                        //worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Color = System.Drawing.ColorTranslator.ToOle(fontColor);
+                        //worksheet.Range[1, 1].Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+                        //    worksheet.Range[1, 1].Interior.Pattern = Microsoft.Office.Interop.Excel.Constants.xlSolid;
+                        //worksheet.Range[1, 1].Interior.ColorIndex = 6;
+                        Range range = worksheet.get_Range("B89", "K89");
+                        range.Cells.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Silver);
                         colNo = colNo + 1;
                     }
                     row = row + 6;
@@ -91,6 +136,11 @@ namespace ExcelAddInDataOutput.Utility
                 return false;
             }
         
+        }
+
+        private  int ToExcelRGB(Color color)
+        {
+            return color.R + color.G * 256 + color.B * 256 * 256;
         }
 
     }

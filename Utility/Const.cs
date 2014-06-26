@@ -27,6 +27,11 @@ namespace ExcelAddInDataOutput.Utility
 
         public const String XML_DB_TYPE_KEY = "cbDbType";
 
+        public const String XML_FONT_COLOR = "txtFontColor";
+
+        public const String XML_FONT = "txtFont";
+
+        public const String XML_HEADER_COLOR = "txtHeaderColor";
 
         public const char SPLITOR = (char)0x2;
     }

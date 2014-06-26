@@ -43,8 +43,6 @@
             this.btnTestConnection = new System.Windows.Forms.Button();
             this.btnFont = new System.Windows.Forms.Button();
             this.btnHeaderColor = new System.Windows.Forms.Button();
-            this.lblFont = new System.Windows.Forms.Label();
-            this.lblHeaderColor = new System.Windows.Forms.Label();
             this.txtNoData = new System.Windows.Forms.TextBox();
             this.lblNoData = new System.Windows.Forms.Label();
             this.cbFieldName = new System.Windows.Forms.CheckBox();
@@ -53,6 +51,10 @@
             this.cbIsNullable = new System.Windows.Forms.CheckBox();
             this.cbIsPrimaryKey = new System.Windows.Forms.CheckBox();
             this.cbDataType = new System.Windows.Forms.CheckBox();
+            this.txtFont = new System.Windows.Forms.TextBox();
+            this.txtHeaderColor = new System.Windows.Forms.TextBox();
+            this.txtFontColor = new System.Windows.Forms.TextBox();
+            this.lblSample = new System.Windows.Forms.Label();
             this.gbDatabase.SuspendLayout();
             this.gbHeaderStyle.SuspendLayout();
             this.gbRow.SuspendLayout();
@@ -204,22 +206,6 @@
             this.btnHeaderColor.UseVisualStyleBackColor = true;
             this.btnHeaderColor.Click += new System.EventHandler(this.btnHeaderColor_Click);
             // 
-            // lblFont
-            // 
-            this.lblFont.AutoSize = true;
-            this.lblFont.Location = new System.Drawing.Point(123, 26);
-            this.lblFont.Name = "lblFont";
-            this.lblFont.Size = new System.Drawing.Size(0, 12);
-            this.lblFont.TabIndex = 1;
-            // 
-            // lblHeaderColor
-            // 
-            this.lblHeaderColor.AutoSize = true;
-            this.lblHeaderColor.Location = new System.Drawing.Point(123, 63);
-            this.lblHeaderColor.Name = "lblHeaderColor";
-            this.lblHeaderColor.Size = new System.Drawing.Size(0, 12);
-            this.lblHeaderColor.TabIndex = 2;
-            // 
             // txtNoData
             // 
             this.txtNoData.Location = new System.Drawing.Point(308, 305);
@@ -251,10 +237,12 @@
             // 
             // gbHeaderStyle
             // 
+            this.gbHeaderStyle.Controls.Add(this.lblSample);
+            this.gbHeaderStyle.Controls.Add(this.txtHeaderColor);
+            this.gbHeaderStyle.Controls.Add(this.txtFontColor);
+            this.gbHeaderStyle.Controls.Add(this.txtFont);
             this.gbHeaderStyle.Controls.Add(this.btnFont);
-            this.gbHeaderStyle.Controls.Add(this.lblFont);
             this.gbHeaderStyle.Controls.Add(this.btnHeaderColor);
-            this.gbHeaderStyle.Controls.Add(this.lblHeaderColor);
             this.gbHeaderStyle.Location = new System.Drawing.Point(16, 166);
             this.gbHeaderStyle.Name = "gbHeaderStyle";
             this.gbHeaderStyle.Size = new System.Drawing.Size(556, 98);
@@ -311,6 +299,39 @@
             this.cbDataType.Text = "データタイプ";
             this.cbDataType.UseVisualStyleBackColor = true;
             // 
+            // txtFont
+            // 
+            this.txtFont.Location = new System.Drawing.Point(379, 24);
+            this.txtFont.Name = "txtFont";
+            this.txtFont.Size = new System.Drawing.Size(63, 21);
+            this.txtFont.TabIndex = 3;
+            this.txtFont.Visible = false;
+            // 
+            // txtHeaderColor
+            // 
+            this.txtHeaderColor.Location = new System.Drawing.Point(379, 54);
+            this.txtHeaderColor.Name = "txtHeaderColor";
+            this.txtHeaderColor.Size = new System.Drawing.Size(63, 21);
+            this.txtHeaderColor.TabIndex = 3;
+            this.txtHeaderColor.Visible = false;
+            // 
+            // txtFontColor
+            // 
+            this.txtFontColor.Location = new System.Drawing.Point(465, 26);
+            this.txtFontColor.Name = "txtFontColor";
+            this.txtFontColor.Size = new System.Drawing.Size(63, 21);
+            this.txtFontColor.TabIndex = 3;
+            this.txtFontColor.Visible = false;
+            // 
+            // lblSample
+            // 
+            this.lblSample.AutoSize = true;
+            this.lblSample.Location = new System.Drawing.Point(130, 33);
+            this.lblSample.Name = "lblSample";
+            this.lblSample.Size = new System.Drawing.Size(41, 12);
+            this.lblSample.TabIndex = 4;
+            this.lblSample.Text = "Sample";
+            // 
             // FormOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -357,8 +378,6 @@
         private System.Windows.Forms.Button btnTestConnection;
         private System.Windows.Forms.Label lblNoData;
         private System.Windows.Forms.TextBox txtNoData;
-        private System.Windows.Forms.Label lblHeaderColor;
-        private System.Windows.Forms.Label lblFont;
         private System.Windows.Forms.Button btnHeaderColor;
         private System.Windows.Forms.Button btnFont;
         private System.Windows.Forms.GroupBox gbHeaderStyle;
@@ -367,5 +386,9 @@
         private System.Windows.Forms.CheckBox cbIsNullable;
         private System.Windows.Forms.CheckBox cbIsPrimaryKey;
         private System.Windows.Forms.CheckBox cbDataType;
+        private System.Windows.Forms.TextBox txtHeaderColor;
+        private System.Windows.Forms.TextBox txtFont;
+        private System.Windows.Forms.TextBox txtFontColor;
+        private System.Windows.Forms.Label lblSample;
     }
 }
