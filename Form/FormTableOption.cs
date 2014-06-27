@@ -86,7 +86,14 @@ namespace ExcelAddInDataOutput.Form
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.btnUpdate.PerformClick();
+            DataGridViewRow currentRow = this.dataGridView.CurrentRow;
+
+            if (currentRow != null)
+            {
+                txtTableId.Text = currentRow.Cells[(int)DATAGRID_ROW.TABLE_ID].Value.ToString();
+                txtWhere.Text = currentRow.Cells[(int)DATAGRID_ROW.WHERE].Value.ToString();
+                txtSQL.Text = currentRow.Cells[(int)DATAGRID_ROW.SQL].Value.ToString();
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)

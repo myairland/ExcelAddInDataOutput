@@ -163,7 +163,7 @@ namespace ExcelAddInDataOutput.DataBase
         {
             string sql= string.Empty;
             sql = sql + "SELECT ";
-            sql = sql + "    CAST(ISNULL(f.[value],'') AS NVARCHAR(100)) AS table_name ";
+            sql = sql + "    CAST(ISNULL(f.[value],'') AS NVARCHAR(100)) AS tableName ";
             sql = sql + "FROM ";
             sql = sql + "    sys.objects c ";
             sql = sql + "    LEFT JOIN ";

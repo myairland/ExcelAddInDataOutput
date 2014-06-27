@@ -62,10 +62,12 @@ namespace ExcelAddInDataOutput.Utility
         public bool Execute(List<TableInfo> list)
         {
             int row = 1;
+            int col = 1;
 
 
             Range currentCell = application.ActiveCell;
             row = currentCell.Row;
+            col = currentCell.Column;
             try
             {
                 foreach(TableInfo tableInfo in list)
@@ -79,7 +81,7 @@ namespace ExcelAddInDataOutput.Utility
                         tableNameDisplay = tableInfo.tableId + "_" + tableInfo.tableName;
 
 
-                    worksheet.Range["A" + row.ToString()].Value = tableNameDisplay;
+                    worksheet.Range["R" + A" + row.ToString()].Value = tableNameDisplay;
 
                     // column 
                     int colNo = 1;
@@ -96,12 +98,23 @@ namespace ExcelAddInDataOutput.Utility
 
                         worksheet.Cells[(row + 5), colNo] = fieldInfo.IsNullable;
 
-                        //worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Color = System.Drawing.ColorTranslator.ToOle(fontColor);
-                        //worksheet.Range[1, 1].Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
-                        //    worksheet.Range[1, 1].Interior.Pattern = Microsoft.Office.Interop.Excel.Constants.xlSolid;
-                        //worksheet.Range[1, 1].Interior.ColorIndex = 6;
-                        Range range = worksheet.get_Range("B89", "K89");
-                        range.Cells.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Silver);
+                        try
+                        {
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Color = System.Drawing.ColorTranslator.ToOle(fontColor);
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Interior.Color = System.Drawing.ColorTranslator.ToOle(headerColor);
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Bold = font.Bold;
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Size = font.Size;
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Strikethrough = font.Strikeout;
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Underline = font.Underline;
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Italic = font.Italic;
+                            worksheet.Range[worksheet.Cells[(row + 1), colNo], worksheet.Cells[(row + 5), colNo]].Font.Name = font.FontFamily;
+                            
+                        }
+                        catch
+                        { 
+                            
+                        }
+
                         colNo = colNo + 1;
                     }
                     row = row + 6;
