@@ -50,10 +50,15 @@ namespace ExcelAddInDataOutput.Form
             ColorConverter colorCovert = new ColorConverter();
 
 
-            lblSample.Font = fontConverter.ConvertFromString(txtFont.Text) as Font;
-            lblSample.ForeColor = (Color)colorCovert.ConvertFromString(txtFontColor.Text);
+            lblHeaderSample.Font = fontConverter.ConvertFromString(txtHeaderFont.Text) as Font;
+            lblHeaderSample.ForeColor = (Color)colorCovert.ConvertFromString(txtHeaderFontColor.Text);
 
-            lblSample.BackColor = (Color)colorCovert.ConvertFromString(txtHeaderColor.Text);
+            lblHeaderSample.BackColor = (Color)colorCovert.ConvertFromString(txtHeaderColor.Text);
+
+            lblCellSample.Font = fontConverter.ConvertFromString(txtCellFont.Text) as Font;
+            lblCellSample.ForeColor = (Color)colorCovert.ConvertFromString(txtCellFontColor.Text);
+
+            lblCellSample.BackColor = (Color)colorCovert.ConvertFromString(txtCellColor.Text);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -85,9 +90,26 @@ namespace ExcelAddInDataOutput.Form
             ConnectionType = cbDbType.Text.Substring(0, 1);
         }
 
-        private void btnFont_Click(object sender, EventArgs e)
+        private void btnHeaderColor_Click(object sender, EventArgs e)
         {
+            ColorDialog colorDialog = new ColorDialog();
+            ColorConverter colorCovert = new ColorConverter();
 
+            if (lblHeaderSample.Text != "")
+                colorDialog.Color = lblHeaderSample.BackColor;
+
+            if (DialogResult.OK == colorDialog.ShowDialog())
+            {
+                txtHeaderColor.Text = colorCovert.ConvertToString(colorDialog.Color);
+
+                lblHeaderSample.BackColor = colorDialog.Color;
+               
+            }
+            
+        }
+
+        private void btnHeaderFont_Click(object sender, EventArgs e)
+        {
             FontDialog fontDialog = new FontDialog();
             FontConverter fontConverter = new FontConverter();
             ColorConverter colorCovert = new ColorConverter();
@@ -95,38 +117,62 @@ namespace ExcelAddInDataOutput.Form
             fontDialog.ShowEffects = true;
             fontDialog.ShowColor = true;
 
-            if (lblSample.Text != "")
+            if (lblHeaderSample.Text != "")
             {
-                fontDialog.Font = fontConverter.ConvertFromString(lblSample.Text) as Font;
-                fontDialog.Color = lblSample.ForeColor;
+                fontDialog.Font = fontConverter.ConvertFromString(lblHeaderSample.Text) as Font;
+                fontDialog.Color = lblHeaderSample.ForeColor;
             }
 
             if (DialogResult.OK == fontDialog.ShowDialog())
             {
-                txtFont.Text = fontConverter.ConvertToString(fontDialog.Font);
-                txtFontColor.Text = colorCovert.ConvertToString(fontDialog.Color);
+                txtHeaderFont.Text = fontConverter.ConvertToString(fontDialog.Font);
+                txtHeaderFontColor.Text = colorCovert.ConvertToString(fontDialog.Color);
 
-                lblSample.Font = fontDialog.Font;
-                lblSample.ForeColor = fontDialog.Color;                
+                lblHeaderSample.Font = fontDialog.Font;
+                lblHeaderSample.ForeColor = fontDialog.Color;
             }
         }
 
-        private void btnHeaderColor_Click(object sender, EventArgs e)
+        private void btnCellFont_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
             ColorConverter colorCovert = new ColorConverter();
 
-            if (lblSample.Text != "")
-                colorDialog.Color = lblSample.BackColor;
+            if (lblCellSample.Text != "")
+                colorDialog.Color = lblCellSample.BackColor;
 
             if (DialogResult.OK == colorDialog.ShowDialog())
             {
-                txtHeaderColor.Text = colorCovert.ConvertToString(colorDialog.Color);
+                txtCellColor.Text = colorCovert.ConvertToString(colorDialog.Color);
 
-                lblSample.BackColor = colorDialog.Color;
-               
+                lblCellSample.BackColor = colorDialog.Color;
+
             }
-            
+        }
+
+        private void btnCellColor_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+            FontConverter fontConverter = new FontConverter();
+            ColorConverter colorCovert = new ColorConverter();
+
+            fontDialog.ShowEffects = true;
+            fontDialog.ShowColor = true;
+
+            if (lblCellSample.Text != "")
+            {
+                fontDialog.Font = fontConverter.ConvertFromString(lblCellSample.Text) as Font;
+                fontDialog.Color = lblCellSample.ForeColor;
+            }
+
+            if (DialogResult.OK == fontDialog.ShowDialog())
+            {
+                txtCellFont.Text = fontConverter.ConvertToString(fontDialog.Font);
+                txtCellFontColor.Text = colorCovert.ConvertToString(fontDialog.Color);
+
+                lblCellSample.Font = fontDialog.Font;
+                lblCellSample.ForeColor = fontDialog.Color;
+            }
         }
 
  

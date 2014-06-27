@@ -27,11 +27,31 @@ namespace ExcelAddInDataOutput.Utility
 
         public const String XML_DB_TYPE_KEY = "cbDbType";
 
-        public const String XML_FONT_COLOR = "txtFontColor";
+        public const String XML_HEADER_FONT_COLOR = "txtHeaderFontColor";
 
-        public const String XML_FONT = "txtFont";
+        public const String XML_HEADER_FONT = "txtHeaderFont";
 
         public const String XML_HEADER_COLOR = "txtHeaderColor";
+
+        public const String XML_CB_DATA_BOX = "cbDataBox";
+
+        public const String XML_CB_HEADER_BOX = "cbHeaderBox";
+
+        public const String XML_CB_NULLABLE = "cbIsNullable";
+
+        public const String XML_CB_PRIMARY_KEY = "cbIsPrimaryKey";
+
+        public const String XML_CB_DATA_TYPE = "cbDataType";
+
+        public const String XML_CB_FIELD_NAME = "cbFieldName";
+
+        public const String XML_NO_DATA = "txtNoData";
+
+        public const String XML_CEll_FONT_COLOR = "txtCellFontColor";
+
+        public const String XML_CEll_FONT = "txtCellFont";
+
+        public const String XML_CEll_COLOR = "txtCellColor";
 
         public const char SPLITOR = (char)0x2;
     }

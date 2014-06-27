@@ -53,7 +53,19 @@ namespace ExcelAddInDataOutput.Utility
             string controlType = Node.Attributes["Type"].Value;
 
             if (controlName == Name)
-                return Node["Text"].InnerText;
+            {
+                string text;
+                try 
+                { 
+                    text = Node["Text"].InnerText;
+                }
+                catch
+                {
+                    text = Node["Checked"].InnerText;
+                }
+                return text;            
+            }
+                
 
             if (Node.HasChildNodes)
             {
