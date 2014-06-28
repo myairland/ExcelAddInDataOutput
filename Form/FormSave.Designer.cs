@@ -38,7 +38,7 @@
             this.lblFileId.AutoSize = true;
             this.lblFileId.Location = new System.Drawing.Point(12, 15);
             this.lblFileId.Name = "lblFileId";
-            this.lblFileId.Size = new System.Drawing.Size(50, 12);
+            this.lblFileId.Size = new System.Drawing.Size(65, 12);
             this.lblFileId.TabIndex = 0;
             this.lblFileId.Text = "ファイルID";
             // 
@@ -46,7 +46,7 @@
             // 
             this.txtFileId.Location = new System.Drawing.Point(91, 12);
             this.txtFileId.Name = "txtFileId";
-            this.txtFileId.Size = new System.Drawing.Size(188, 19);
+            this.txtFileId.Size = new System.Drawing.Size(188, 21);
             this.txtFileId.TabIndex = 1;
             // 
             // btnOK
@@ -72,6 +72,7 @@
             this.Name = "FormSave";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "FormSave";
+            this.Load += new System.EventHandler(this.FormSave_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -18,14 +18,10 @@ namespace ExcelAddInDataOutput
     public class Ribbon : Office.IRibbonExtensibility
     {
         private Office.IRibbonUI ribbon;
-
-        private string ApplicationDataPath;
-
+        
         public Ribbon()
         {
-            ApplicationDataPath = Common.pathEdit(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
-                      + Const.PROJECT_NAME;
-        }
+                    }
 
         #region IRibbonExtensibility のメンバー
 
@@ -54,7 +50,7 @@ namespace ExcelAddInDataOutput
 
         public void galleryData_Change(IRibbonControl control, string selectedId, int selectedIndex)
         {
-            string fileName = System.IO.Directory.GetFiles(ApplicationDataPath, "*.add")[selectedIndex];
+            string fileName = System.IO.Directory.GetFiles(Common.getConfigFolder(), "*.*")[selectedIndex];
             BaseDataBase db = DbFactory.CreateDbInstanceFromXML();
             DataOutput dataOutput = new DataOutput(Globals.ThisAddIn.Application, db);
             dataOutput.Execute(fileName);
@@ -63,19 +59,19 @@ namespace ExcelAddInDataOutput
 
         public int galleryData_getItemCount(Office.IRibbonControl control)
         {
-            return System.IO.Directory.GetFiles(ApplicationDataPath, "*.add").Length;
+            return System.IO.Directory.GetFiles(Common.getConfigFolder(), "*.*").Length;
         }
 
         public string galleryData_getItemLabel(IRibbonControl control, int index)
-        {            
-            return Path.GetFileName(Directory.GetFiles(ApplicationDataPath, "*.add")[index]);
+        {
+            return Path.GetFileName(Directory.GetFiles(Common.getConfigFolder(), "*.*")[index]);
         }
 
         public string galleryData_getLabel(IRibbonControl control)
         {
             if (control.Id == "galleryData")
             {
-                if (System.IO.Directory.GetFiles(ApplicationDataPath, "*.add").Length != 0)
+                if (System.IO.Directory.GetFiles(Common.getConfigFolder(), "*.*").Length != 0)
                     return "選択";
                 else
                     return "未設定";
@@ -83,18 +79,6 @@ namespace ExcelAddInDataOutput
 
             return "";
         }
-
-        //public string GetLabel(IRibbonControl control)
-        //{
-        //    private string strText = "";
-        //    switch (control.Id)
-        //    {
-        //       case "gallery1" : strText = "Select a Device"; break;
-        //       case "button1" : strText = "Button in Gallery"; break;
-        //       default : strText = "Select a Device"; break;
-        //    }
-        //    return strText;
-        //}
 
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {

@@ -17,6 +17,8 @@ namespace ExcelAddInDataOutput.Utility
 
         public const String PROJECT_NAME = "ExcelAddInDataOutput";
 
+        public const String CONFIG_FOLDER = "config";
+
         public const String XML_USER_ID_KEY = "txtUserId";
 
         public const String XML_USER_PASSWORD_KEY = "txtPassword";

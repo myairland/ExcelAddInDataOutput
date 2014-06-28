@@ -17,8 +17,6 @@ namespace ExcelAddInDataOutput.Form
     public partial class FormOption : System.Windows.Forms.Form
     {
 
-        private static string ApplicationDataPath;
-
         private string ConnectionType;
 
         public FormOption()
@@ -33,13 +31,12 @@ namespace ExcelAddInDataOutput.Form
         /// <param name="e"></param>
         private void FormOption_Load(object sender, EventArgs e)
         {
-            ApplicationDataPath = Common.pathEdit(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
-                                   + Const.PROJECT_NAME;
+            string appPath = Common.getApplicationFolder();
+   
+            if (!Directory.Exists(appPath))
+                Directory.CreateDirectory(appPath);
 
-            if (!Directory.Exists(ApplicationDataPath))
-                Directory.CreateDirectory(ApplicationDataPath);
-
-            FormSerialisor.Deserialise(this, ApplicationDataPath + @"\" + Const.SETTING_XML);
+            FormSerialisor.Deserialise(this, appPath + Const.SETTING_XML);
 
             restoreLabelStr();
         }
@@ -63,7 +60,7 @@ namespace ExcelAddInDataOutput.Form
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            FormSerialisor.Serialise(this, ApplicationDataPath + @"\" + Const.SETTING_XML);
+            FormSerialisor.Serialise(this, Common.getApplicationFolder()  + Const.SETTING_XML);
             this.Close();
         }
 

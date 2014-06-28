@@ -17,13 +17,11 @@ namespace ExcelAddInDataOutput.Form
         public FormSave()
         {
             InitializeComponent();
-            ApplicationDataPath = Common.pathEdit(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
-                                    + Const.PROJECT_NAME;
         }
 
-        public string fileId;
 
-        private string ApplicationDataPath;
+
+        public string fileId;
 
         public List<string> sqlInfo = new List<string>();
 
@@ -37,9 +35,9 @@ namespace ExcelAddInDataOutput.Form
                 return;
             }
 
-            fileId = txtFileId.Text + ".add";
+            fileId = txtFileId.Text;
 
-            using (StreamWriter writer = new StreamWriter(ApplicationDataPath + @"\" + fileId))
+            using (StreamWriter writer = new StreamWriter(Common.getConfigFolder() + fileId))
             {
                 foreach(string line in sqlInfo)
                 {
@@ -49,6 +47,11 @@ namespace ExcelAddInDataOutput.Form
             }
 
             this.Close();
+        }
+
+        private void FormSave_Load(object sender, EventArgs e)
+        {
+            this.txtFileId.Text = this.fileId;
         }
     }
 }

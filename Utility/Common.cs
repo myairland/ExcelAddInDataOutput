@@ -83,6 +83,18 @@ namespace ExcelAddInDataOutput.Utility
 
         }
 
+        public static string getConfigFolder()
+        {
+            return getApplicationFolder() + Const.CONFIG_FOLDER + @"\";
+        }
+
+        public static string getApplicationFolder()
+        {
+            return Common.pathEdit(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+                              + Const.PROJECT_NAME + @"\";
+
+        }
+
 
     }
 }

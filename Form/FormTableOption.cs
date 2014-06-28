@@ -20,7 +20,7 @@ namespace ExcelAddInDataOutput.Form
         SQL,        
         }
 
-        private string ApplicationDataPath;
+        private string currentfile;
 
         public FormTableOption()
         {
@@ -29,14 +29,18 @@ namespace ExcelAddInDataOutput.Form
 
         private void FormTableOption_Load(object sender, EventArgs e)
         {
-            ApplicationDataPath = Common.pathEdit(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
-                       + Const.PROJECT_NAME;
             InitializeControl();
         }
 
         private void InitializeControl()
         {
-            string []  files = System.IO.Directory.GetFiles(ApplicationDataPath, "*.add");
+            string configPath = Common.getConfigFolder();
+
+            if (!Directory.Exists(configPath))
+                Directory.CreateDirectory(configPath);
+
+
+            string[] files = System.IO.Directory.GetFiles(configPath, "*.*");
             foreach (string fileName in files)
             {
                 lslFileList.Items.Add(System.IO.Path.GetFileName(fileName));
@@ -106,6 +110,8 @@ namespace ExcelAddInDataOutput.Form
             }
 
             FormSave formSave = new FormSave();
+
+            formSave.fileId = currentfile;
             for (int i = 0; i < dataGridView.Rows.Count; i++)
             {
                 formSave.sqlInfo.Add(dataGridView[(int)DATAGRID_ROW.TABLE_ID, i].Value + Const.SPLITOR.ToString() +
@@ -114,12 +120,13 @@ namespace ExcelAddInDataOutput.Form
             
             }
 
-
+            
             formSave.ShowDialog();
 
             if (!string.IsNullOrEmpty(formSave.fileId))
             {
-                lslFileList.Items.Add(formSave.fileId);
+                if(!lslFileList.Items.Contains(formSave.fileId))
+                    lslFileList.Items.Add(formSave.fileId);
             
             }
 
@@ -141,9 +148,11 @@ namespace ExcelAddInDataOutput.Form
 
             string FileId = lslFileList.SelectedItem.ToString();
 
+            currentfile = FileId;
+
             dataGridView.Rows.Clear();
 
-            using (StreamReader reader = new StreamReader(ApplicationDataPath + @"\" + FileId))
+            using (StreamReader reader = new StreamReader(Common.getConfigFolder() + FileId))
             {
                 while (!reader.EndOfStream)
                 {
@@ -179,10 +188,10 @@ namespace ExcelAddInDataOutput.Form
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     string fileId = lslFileList.SelectedItem.ToString();
-                    File.Delete(ApplicationDataPath + @"\" + fileId);
+                    File.Delete(Common.getConfigFolder() + fileId);
                     lslFileList.Items.Remove(lslFileList.SelectedItem);
                     clearControl();
-                }
+                }                
             }
         }
 
@@ -192,7 +201,9 @@ namespace ExcelAddInDataOutput.Form
             txtTableId.Text = string.Empty;
             txtWhere.Text = string.Empty;
             txtSQL.Text = string.Empty;
+            currentfile = "";
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
