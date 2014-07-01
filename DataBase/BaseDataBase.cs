@@ -26,9 +26,13 @@ namespace ExcelAddInDataOutput.DataBase
 
         public abstract DbDataAdapter getDbDataAdapter();
 
+        public abstract DataTable getSynonymSchema(string tableId);
+
+        public abstract string getSynonymTableName(string tableId);
+
         public abstract string getTableSchemaSQL(string tableId);
 
-        public abstract string getTableNameSQL(string tableId);
+        public abstract string getTableNameSQL(string tableId);        
 
         public virtual DataTable GetDataTable(string sqlString)
         {

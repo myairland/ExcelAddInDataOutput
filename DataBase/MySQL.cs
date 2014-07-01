@@ -90,18 +90,16 @@ namespace ExcelAddInDataOutput.DataBase
             return strSQL;
         }
 
+        public override DataTable getSynonymSchema(string tableId)
+        {
+            return new DataTable();
+        }
 
-        /*
+        public override string getSynonymTableName(string tableId)
+        {
+            return "";
+        }
 
-         Create table test1(
-            field_name int comment '字段的注释'
-        )comment='表的注释'; 
-
-        2 修改表的注释
-        alter table test1 comment '修改后的表的注释'; 
-                 * 
-        3 修改字段的注释
-        alter table test1 modify column field_name int comment '修改后的字段注释';   */
     }
 }
 

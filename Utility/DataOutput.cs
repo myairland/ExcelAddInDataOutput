@@ -85,7 +85,15 @@ namespace ExcelAddInDataOutput.Utility
                 {
                     System.Data.DataTable dataTable = db.getTableSchema(info.tableId);
 
-                    info.tableName = db.getTableName(info.tableId);
+                    if (dataTable.Rows.Count != 0)
+                    {
+                        info.tableName = db.getTableName(info.tableId);
+                    }
+                    else
+                    {
+                        info.tableName = db.getSynonymTableName(info.tableId);
+                        dataTable = db.getSynonymSchema(info.tableId);
+                    }
 
                     for (int i = 0; i < dataTable.Rows.Count; i++)
                     {
@@ -103,10 +111,11 @@ namespace ExcelAddInDataOutput.Utility
                         if (dataTable.Rows[i]["IsPrimaryKey"].ToString() == "True")
                             fieldInfo.IsPrimaryKey = true;
                         else
-                            fieldInfo.IsPrimaryKey = false;                       
+                            fieldInfo.IsPrimaryKey = false;
 
                         info.FieldList.Add(fieldInfo);
                     }
+
 
                 }
             }

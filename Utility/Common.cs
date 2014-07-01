@@ -55,14 +55,16 @@ namespace ExcelAddInDataOutput.Utility
             if (controlName == Name)
             {
                 string text;
-                try 
-                { 
+
+                if (Node.SelectSingleNode("Text") != null)
+                {
                     text = Node["Text"].InnerText;
                 }
-                catch
+                else
                 {
                     text = Node["Checked"].InnerText;
                 }
+
                 return text;            
             }
                 

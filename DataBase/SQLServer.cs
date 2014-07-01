@@ -118,7 +118,7 @@ namespace ExcelAddInDataOutput.DataBase
             strSQL = strSQL + "        ELSE ";
             strSQL = strSQL + "                'False' ";
             strSQL = strSQL + "    END, ";
-            strSQL = strSQL + "    dataType=case when isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0) = 0 then b.name else b.name + '(' + CAST(COLUMNPROPERTY(a.id,a.name,'PRECISION')AS NVARCHAR(100))+ ',' + CAST(isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0)AS NVARCHAR(100)) + ')' end ,  ";
+            strSQL = strSQL + "    dataType=case when isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0) = 0 then b.name + '(' + CAST(COLUMNPROPERTY(a.id,a.name,'PRECISION')AS NVARCHAR(100))+ ')' else b.name + '(' + CAST(COLUMNPROPERTY(a.id,a.name,'PRECISION')AS NVARCHAR(100))+ ',' + CAST(isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0)AS NVARCHAR(100)) + ')' end ,  ";
             strSQL = strSQL + "    isNullable=CASE ";
             strSQL = strSQL + "    WHEN A.ISNULLABLE=1 THEN ";
             strSQL = strSQL + "        'True' ";
@@ -182,5 +182,141 @@ namespace ExcelAddInDataOutput.DataBase
         {
             return new SqlDataAdapter();
         }
+
+
+        public override DataTable getSynonymSchema(string tableId)
+        {
+            string strSQL = string.Empty;
+            string synonymDb = string.Empty;
+            DataTable schemaDataTable = new DataTable();
+            DataTable dataTable = new DataTable();
+
+            strSQL = strSQL + "SELECT ";
+            strSQL = strSQL + "    base_object_name ";
+            strSQL = strSQL + "FROM ";
+            strSQL = strSQL + "    sys.synonyms ";
+            strSQL = strSQL + "WHERE ";
+            strSQL = strSQL + "    name='" + tableId + "' ";
+
+            dataTable = this.GetDataTable(strSQL);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                synonymDb = dataTable.Rows[0][0].ToString();
+
+                synonymDb = synonymDb.Substring(synonymDb.IndexOf('[') + 1,
+                                                synonymDb.IndexOf(']') - synonymDb.IndexOf('[') - 1);
+
+                try
+                {
+                    System.Data.Common.DbConnection Con;
+
+                    string ConectionString = @"Server=" + server +
+                        ";User Id=" + userId +
+                        ";Password=" + password +
+                        ";Database=" + synonymDb + ";";
+                    Con = new SqlConnection(ConectionString);
+
+                    Con.Open();
+
+                    System.Data.Common.DbCommand vlCommand = default(System.Data.Common.DbCommand);
+                    System.Data.Common.DbDataAdapter vlAdapter = default(System.Data.Common.DbDataAdapter);
+
+                    vlCommand = Con.CreateCommand();
+                    vlCommand.CommandText = getTableSchemaSQL(tableId);
+
+                    vlAdapter = getDbDataAdapter();
+
+                    vlAdapter.SelectCommand = vlCommand;
+
+                    vlAdapter.Fill(schemaDataTable);
+
+                    Con.Close();
+                    
+                }
+                catch
+                { 
+                
+                }
+            
+            }
+
+
+            return schemaDataTable;
+
+        }
+
+        public override string getSynonymTableName(string tableId)
+        {
+            string strSQL = string.Empty;
+            string synonymDb = string.Empty;
+            string synonymTableName = string.Empty;
+            DataTable schemaDataTable = new DataTable();
+            DataTable dataTable = new DataTable();
+
+            strSQL = strSQL + "SELECT ";
+            strSQL = strSQL + "    base_object_name ";
+            strSQL = strSQL + "FROM ";
+            strSQL = strSQL + "    sys.synonyms ";
+            strSQL = strSQL + "WHERE ";
+            strSQL = strSQL + "    name='" + tableId + "' ";
+
+            dataTable = this.GetDataTable(strSQL);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                synonymDb = dataTable.Rows[0][0].ToString();
+
+                synonymDb = synonymDb.Substring(synonymDb.IndexOf('[') + 1,
+                                                synonymDb.IndexOf(']') - synonymDb.IndexOf('[') - 1);
+
+                try
+                {
+                    System.Data.Common.DbConnection Con;
+
+                    string ConectionString = @"Server=" + server +
+                        ";User Id=" + userId +
+                        ";Password=" + password +
+                        ";Database=" + synonymDb + ";";
+                    Con = new SqlConnection(ConectionString);
+
+                    Con.Open();
+
+                    System.Data.Common.DbCommand vlCommand = default(System.Data.Common.DbCommand);
+                    System.Data.Common.DbDataAdapter vlAdapter = default(System.Data.Common.DbDataAdapter);
+
+                    vlCommand = Con.CreateCommand();
+                    vlCommand.CommandText = getTableNameSQL(tableId);
+
+                    vlAdapter = getDbDataAdapter();
+
+                    vlAdapter.SelectCommand = vlCommand;
+
+                    vlAdapter.Fill(schemaDataTable);
+
+                    Con.Close();
+
+
+                    if (schemaDataTable != null && schemaDataTable.Rows.Count > 0)
+                    {
+                        synonymTableName = schemaDataTable.Rows[0]["tableName"].ToString();
+                    }
+                    else
+                    {
+                        synonymTableName = "";
+                    }
+
+                }
+                catch
+                {
+
+                }
+
+            }
+
+
+            return synonymTableName;
+        }
+
     }
 }
