@@ -184,92 +184,93 @@ namespace ExcelAddInDataOutput.DataBase
         }
 
 
-        public override DataTable getSynonymSchema(string tableId)
+        public override DataTable getSynonymSchema(string synonymId)
         {
             string strSQL = string.Empty;
+            string tableId = string.Empty;
             string synonymDb = string.Empty;
             DataTable schemaDataTable = new DataTable();
-            DataTable dataTable = new DataTable();
 
-            strSQL = strSQL + "SELECT ";
-            strSQL = strSQL + "    base_object_name ";
-            strSQL = strSQL + "FROM ";
-            strSQL = strSQL + "    sys.synonyms ";
-            strSQL = strSQL + "WHERE ";
-            strSQL = strSQL + "    name='" + tableId + "' ";
+            getDataBaseAndTableId(synonymId, out synonymDb, out  tableId);
 
-            dataTable = this.GetDataTable(strSQL);
+            strSQL = getTableSchemaSQL(tableId);
 
-            if (dataTable.Rows.Count > 0)
-            {
-                synonymDb = dataTable.Rows[0][0].ToString();
-
-                synonymDb = synonymDb.Substring(synonymDb.IndexOf('[') + 1,
-                                                synonymDb.IndexOf(']') - synonymDb.IndexOf('[') - 1);
-
-                try
-                {
-                    System.Data.Common.DbConnection Con;
-
-                    string ConectionString = @"Server=" + server +
-                        ";User Id=" + userId +
-                        ";Password=" + password +
-                        ";Database=" + synonymDb + ";";
-                    Con = new SqlConnection(ConectionString);
-
-                    Con.Open();
-
-                    System.Data.Common.DbCommand vlCommand = default(System.Data.Common.DbCommand);
-                    System.Data.Common.DbDataAdapter vlAdapter = default(System.Data.Common.DbDataAdapter);
-
-                    vlCommand = Con.CreateCommand();
-                    vlCommand.CommandText = getTableSchemaSQL(tableId);
-
-                    vlAdapter = getDbDataAdapter();
-
-                    vlAdapter.SelectCommand = vlCommand;
-
-                    vlAdapter.Fill(schemaDataTable);
-
-                    Con.Close();
-                    
-                }
-                catch
-                { 
-                
-                }
-            
-            }
-
+            schemaDataTable = getSynonymDataTable(synonymDb, strSQL);
 
             return schemaDataTable;
 
         }
 
-        public override string getSynonymTableName(string tableId)
+        public override string getSynonymTableName(string synonymId)
         {
+
             string strSQL = string.Empty;
+            string tableId = string.Empty;
             string synonymDb = string.Empty;
             string synonymTableName = string.Empty;
             DataTable schemaDataTable = new DataTable();
+
+            getDataBaseAndTableId(synonymId, out synonymDb, out  tableId);
+
+            strSQL = getTableNameSQL(tableId);
+
+            schemaDataTable = getSynonymDataTable(synonymDb, strSQL);
+
+            if (schemaDataTable != null && schemaDataTable.Rows.Count > 0)
+            {
+                synonymTableName = schemaDataTable.Rows[0]["tableName"].ToString();
+            }
+            else
+            {
+                synonymTableName = "";
+            }            
+
+
+            return synonymTableName;
+        }
+
+        private void getDataBaseAndTableId(string synonymId, out string dataBase, out string  tableId)
+        {
+            string strSQL = string.Empty;
             DataTable dataTable = new DataTable();
+            string tempStr;
+
+            dataBase = "";
+            tableId ="";
 
             strSQL = strSQL + "SELECT ";
             strSQL = strSQL + "    base_object_name ";
             strSQL = strSQL + "FROM ";
             strSQL = strSQL + "    sys.synonyms ";
             strSQL = strSQL + "WHERE ";
-            strSQL = strSQL + "    name='" + tableId + "' ";
+            strSQL = strSQL + "    name='" + synonymId + "' ";
 
             dataTable = this.GetDataTable(strSQL);
 
             if (dataTable.Rows.Count > 0)
             {
-                synonymDb = dataTable.Rows[0][0].ToString();
+                tempStr = dataTable.Rows[0][0].ToString();
 
-                synonymDb = synonymDb.Substring(synonymDb.IndexOf('[') + 1,
-                                                synonymDb.IndexOf(']') - synonymDb.IndexOf('[') - 1);
+                dataBase = tempStr.Substring(tempStr.IndexOf('[') + 1,
+                                                tempStr.IndexOf(']') - tempStr.IndexOf('[') - 1);
 
+                tableId = tempStr.Substring(tempStr.LastIndexOf('[') + 1,
+                                                tempStr.LastIndexOf(']') - tempStr.LastIndexOf('[') - 1);
+
+               
+
+            }
+        
+        }
+
+        private DataTable getSynonymDataTable(string synonymDb, string sql)
+        {
+
+            DataTable schemaDataTable = new DataTable();
+
+
+            if (synonymDb != "")
+            {
                 try
                 {
                     System.Data.Common.DbConnection Con;
@@ -286,7 +287,7 @@ namespace ExcelAddInDataOutput.DataBase
                     System.Data.Common.DbDataAdapter vlAdapter = default(System.Data.Common.DbDataAdapter);
 
                     vlCommand = Con.CreateCommand();
-                    vlCommand.CommandText = getTableNameSQL(tableId);
+                    vlCommand.CommandText = sql;
 
                     vlAdapter = getDbDataAdapter();
 
@@ -295,16 +296,6 @@ namespace ExcelAddInDataOutput.DataBase
                     vlAdapter.Fill(schemaDataTable);
 
                     Con.Close();
-
-
-                    if (schemaDataTable != null && schemaDataTable.Rows.Count > 0)
-                    {
-                        synonymTableName = schemaDataTable.Rows[0]["tableName"].ToString();
-                    }
-                    else
-                    {
-                        synonymTableName = "";
-                    }
 
                 }
                 catch
@@ -315,7 +306,8 @@ namespace ExcelAddInDataOutput.DataBase
             }
 
 
-            return synonymTableName;
+            return schemaDataTable;
+        
         }
 
     }

@@ -62,7 +62,7 @@
             // 
             // btnConfigure
             // 
-            this.btnConfigure.Label = "データベース設定";
+            this.btnConfigure.Label = "基本設定";
             this.btnConfigure.Name = "btnConfigure";
             // 
             // btnTableConfigure

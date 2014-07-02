@@ -220,7 +220,7 @@ namespace ExcelAddInDataOutput.Utility
                         column = 1;
                         foreach (DataColumn columnObj in data.Columns)
                         {
-                            worksheet.Cells[row, (column++)] = dataRow[columnObj].ToString();
+                            worksheet.Cells[row, (column++)] = "'" + dataRow[columnObj].ToString();
                         }
 
                         row = row + 1;

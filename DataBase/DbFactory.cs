@@ -13,7 +13,8 @@ namespace ExcelAddInDataOutput.DataBase
             BaseDataBase db = null;
             switch (dbType)
             {
-                case Const.DB_TYPE_ORACLE:                    
+                case Const.DB_TYPE_ORACLE:
+                    db = new Oracle(userid, password, server);
                     break;
                 case Const.DB_TYPE_SQLSERVER:
                     db = new SQLServer(userid, password, server, database);

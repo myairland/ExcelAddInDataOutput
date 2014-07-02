@@ -4,7 +4,7 @@
         <tabs>
             <tab idMso="TabAddIns">
                 <group id="groupData" label="データ抽出">
-                    <button id="btnConfigure" onAction="btnConfigure_Click" label="データベース設定" showImage="false" />
+                    <button id="btnConfigure" onAction="btnConfigure_Click" label="基本設定" showImage="false" />
                   <button id="btnTableConfigure" onAction="btnTableConfigure_Click"  label="抽出テーブル設定" showImage="false" />
                   <gallery id="galleryData" 
                            showImage="false" columns="1"

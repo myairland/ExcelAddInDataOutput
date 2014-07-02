@@ -56,7 +56,7 @@
             this.lblTableId.AutoSize = true;
             this.lblTableId.Location = new System.Drawing.Point(321, 16);
             this.lblTableId.Name = "lblTableId";
-            this.lblTableId.Size = new System.Drawing.Size(65, 12);
+            this.lblTableId.Size = new System.Drawing.Size(54, 12);
             this.lblTableId.TabIndex = 0;
             this.lblTableId.Text = "テーブルID";
             // 
@@ -65,16 +65,16 @@
             this.lblWhere.AutoSize = true;
             this.lblWhere.Location = new System.Drawing.Point(351, 61);
             this.lblWhere.Name = "lblWhere";
-            this.lblWhere.Size = new System.Drawing.Size(35, 12);
+            this.lblWhere.Size = new System.Drawing.Size(36, 12);
             this.lblWhere.TabIndex = 0;
             this.lblWhere.Text = "Where";
             // 
             // lblSQL
             // 
             this.lblSQL.AutoSize = true;
-            this.lblSQL.Location = new System.Drawing.Point(351, 101);
+            this.lblSQL.Location = new System.Drawing.Point(351, 164);
             this.lblSQL.Name = "lblSQL";
-            this.lblSQL.Size = new System.Drawing.Size(35, 12);
+            this.lblSQL.Size = new System.Drawing.Size(38, 12);
             this.lblSQL.TabIndex = 0;
             this.lblSQL.Text = "SQL文";
             // 
@@ -82,22 +82,23 @@
             // 
             this.txtTableId.Location = new System.Drawing.Point(392, 13);
             this.txtTableId.Name = "txtTableId";
-            this.txtTableId.Size = new System.Drawing.Size(100, 21);
+            this.txtTableId.Size = new System.Drawing.Size(100, 19);
             this.txtTableId.TabIndex = 5;
             // 
             // txtWhere
             // 
             this.txtWhere.Location = new System.Drawing.Point(392, 58);
+            this.txtWhere.Multiline = true;
             this.txtWhere.Name = "txtWhere";
-            this.txtWhere.Size = new System.Drawing.Size(100, 21);
+            this.txtWhere.Size = new System.Drawing.Size(282, 97);
             this.txtWhere.TabIndex = 6;
             // 
             // txtSQL
             // 
-            this.txtSQL.Location = new System.Drawing.Point(392, 98);
+            this.txtSQL.Location = new System.Drawing.Point(392, 161);
             this.txtSQL.Multiline = true;
             this.txtSQL.Name = "txtSQL";
-            this.txtSQL.Size = new System.Drawing.Size(282, 86);
+            this.txtSQL.Size = new System.Drawing.Size(282, 23);
             this.txtSQL.TabIndex = 7;
             // 
             // dataGridView
@@ -150,9 +151,9 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(515, 8);
+            this.btnAdd.Location = new System.Drawing.Point(516, 8);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(45, 65);
+            this.btnAdd.Size = new System.Drawing.Size(45, 24);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "追加";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -160,9 +161,9 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(577, 8);
+            this.btnUpdate.Location = new System.Drawing.Point(567, 8);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(45, 65);
+            this.btnUpdate.Size = new System.Drawing.Size(45, 24);
             this.btnUpdate.TabIndex = 9;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -170,9 +171,9 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(642, 8);
+            this.btnDelete.Location = new System.Drawing.Point(618, 8);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 65);
+            this.btnDelete.Size = new System.Drawing.Size(44, 24);
             this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "削除";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -233,7 +234,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(398, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.Size = new System.Drawing.Size(88, 12);
             this.label1.TabIndex = 13;
             this.label1.Text = "ex:FIELD =\"AA\"";
             // 
