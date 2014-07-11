@@ -253,6 +253,7 @@ namespace ExcelAddInDataOutput.Utility
             }
             catch
             {
+                System.Windows.Forms.MessageBox.Show("データ抽出失敗しました。WHERE文を注意してください!");
                 return false;
             }
         
